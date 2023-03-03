@@ -3,6 +3,7 @@ extends KinematicBody2D
 
 onready var gun = $Gun
 
+var health = 100
 
 var dir: Vector2 = Vector2.ZERO
 var velocity: Vector2 = Vector2.ZERO
@@ -33,8 +34,15 @@ func _physics_process(delta):
 
 	dir.x = r_input - l_input
 
-	if dir.x != 0:
-		facing = dir.x
+	facing = global_position.direction_to(get_global_mouse_position()).normalized().x
+	if facing > 0:
+		facing = ceil(facing)
+	elif facing < 0:
+		facing = floor(facing)
+	elif facing == 0:
+		facing = 1
+
+	$Body.rect_scale.x = facing
 
 	velocity.y += gravity * meter_unit * delta
 	velocity += dir * acceleration * delta
@@ -73,4 +81,8 @@ func _unhandled_input(event):
 	
 	if event.is_action("shoot"):
 		if event.is_pressed():
-			gun.get_node("Receiver").create_projectile()
+			gun.get_node("Receiver").create_projectile($HurtBox)
+
+
+func _on_HurtBox_got_hit(dam, pen):
+	health -= dam
