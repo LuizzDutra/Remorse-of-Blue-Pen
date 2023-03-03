@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Area2D",
+"class": "HurtBox",
+"language": "GDScript",
+"path": "res://Scripts/HurtBox.gd"
+} ]
+_global_script_class_icons={
+"HurtBox": ""
+}
+
 [application]
 
 config/name="Remorse-of- Blue- Pen"
