@@ -9,9 +9,9 @@ export var damage = 10
 export var penetration = 10
 
 
-func create_projectile(parent_area: Area2D):
+func create_projectile(parent_area: Area2D, target_global_position):
 	var proj =projectile_pack.instance()
-	proj.velocity = global_position.direction_to(get_global_mouse_position()) * speed
+	proj.velocity = global_position.direction_to(target_global_position) * speed
 	proj.global_position = global_position
 	proj.pen_type = pen_type
 	proj.damage = damage
