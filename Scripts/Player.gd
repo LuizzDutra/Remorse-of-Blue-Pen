@@ -3,8 +3,10 @@ extends KinematicBody2D
 
 onready var gun = $Gun
 
-var health = 100
+export var health = 100 setget set_health
+var dead = false
 
+#movement variables
 var dir: Vector2 = Vector2.ZERO
 var velocity: Vector2 = Vector2.ZERO
 export var acceleration: float = 1200
@@ -31,6 +33,8 @@ func _ready():
 func _physics_process(delta):
 	if is_on_floor():
 		jump_able = true
+	else:
+		jump_able = false
 
 	dir.x = r_input - l_input
 
@@ -84,5 +88,11 @@ func _unhandled_input(event):
 			gun.get_node("Receiver").create_projectile($HurtBox)
 
 
-func _on_HurtBox_got_hit(dam, pen):
-	health -= dam
+func _on_HurtBox_got_hit(dam, _pen):
+	set_health(health - dam)
+
+
+func set_health(value):
+	health = value
+	if health <= 0:
+		dead = true
