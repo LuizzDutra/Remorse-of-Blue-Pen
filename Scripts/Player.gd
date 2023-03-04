@@ -85,7 +85,7 @@ func _unhandled_input(event):
 	
 	if event.is_action("shoot"):
 		if event.is_pressed():
-			gun.get_node("Receiver").create_projectile($HurtBox)
+			gun.get_node("Receiver").create_projectile($HurtBox, get_global_mouse_position())
 	
 	if event.is_action("interact"):
 		if event.is_pressed():

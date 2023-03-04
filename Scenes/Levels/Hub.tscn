@@ -15,6 +15,7 @@ script = ExtResource( 4 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2( 11, 132 )
+collision_layer = 129
 __meta__ = {
 "_edit_group_": true
 }
@@ -23,6 +24,9 @@ __meta__ = {
 shape = SubResource( 1 )
 
 [node name="Enemy" parent="." instance=ExtResource( 2 )]
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="LevelAreas" type="Node2D" parent="."]
 

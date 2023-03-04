@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "RayCast2D",
+"class": "DetectionCast",
+"language": "GDScript",
+"path": "res://Scripts/DetectionCast.gd"
+}, {
 "base": "Area2D",
 "class": "HurtBox",
 "language": "GDScript",
@@ -20,6 +25,7 @@ _global_script_classes=[ {
 "path": "res://Scripts/LevelEnterArea.gd"
 } ]
 _global_script_class_icons={
+"DetectionCast": "",
 "HurtBox": "",
 "level_enter_area": ""
 }
