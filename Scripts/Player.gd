@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 
 onready var gun = $Gun
+onready var interaction_area = $InteractionArea
 
 export var health = 100 setget set_health
 var dead = false
@@ -25,9 +26,6 @@ var shoot_input = false
 var jump_able = false
 
 var facing = 1
-
-func _ready():
-	pass
 
 
 func _physics_process(delta):
@@ -65,6 +63,8 @@ func _physics_process(delta):
 
 	velocity = move_and_slide(velocity, Vector2.UP)
 
+	
+
 
 func _unhandled_input(event):
 	if event.is_action("move_right"):
@@ -86,6 +86,10 @@ func _unhandled_input(event):
 	if event.is_action("shoot"):
 		if event.is_pressed():
 			gun.get_node("Receiver").create_projectile($HurtBox)
+	
+	if event.is_action("interact"):
+		if event.is_pressed():
+			interact_process()
 
 
 func _on_HurtBox_got_hit(dam, _pen):
@@ -96,3 +100,17 @@ func set_health(value):
 	health = value
 	if health <= 0:
 		dead = true
+
+func interact_process():#interaction
+	var interact_q_0 = []
+	var interact_q_1 = []
+	for area in interaction_area.get_overlapping_areas():
+		print(area)
+		if area.ident == 0:
+			interact_q_0.append(area)
+		if area.ident == 1:
+			interact_q_1.append(area)
+	if len(interact_q_0) > 0:
+		interact_q_0[0].interact()
+	elif len(interact_q_1) > 0:
+		interact_q_1[0].interact()
