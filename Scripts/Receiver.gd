@@ -9,12 +9,12 @@ export var damage = 10
 export var penetration = 10
 
 
-func create_projectile(parent_area: Area2D, target_global_position):
+func create_projectile(team, target_global_position):
 	var proj =projectile_pack.instance()
 	proj.velocity = global_position.direction_to(target_global_position) * speed
 	proj.global_position = global_position
 	proj.pen_type = pen_type
 	proj.damage = damage
 	proj.penetration = penetration
-	proj.parent_area = parent_area
+	proj.team = team
 	get_tree().root.get_node("Game").add_child(proj)
