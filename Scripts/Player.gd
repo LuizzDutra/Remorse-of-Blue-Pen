@@ -10,20 +10,24 @@ var dead = false
 #movement variables
 var dir: Vector2 = Vector2.ZERO
 var velocity: Vector2 = Vector2.ZERO
-export var acceleration: float = 1200
-export var friction: float = 600
-export var max_speed: float = 300
+export var acceleration: float = 3000
+export var friction: float = 1500
+export var max_speed: float = 500
+export var max_vertical_speed: float = 500
 export var gravity: float = 9.8
 export var jump_force = 5
-
+export var dash_mult = 1.5
 var meter_unit = 64
 
 var l_input = 0
 var r_input = 0
-var jump_input = false
+var d_input = 0
+var jump_input = 0
 var shoot_input = false
 
 var jump_able = false
+var dash_able = true
+var dashing = false
 
 var facing = 1
 
@@ -33,6 +37,7 @@ func _ready():
 func _physics_process(delta):
 	if is_on_floor():
 		jump_able = true
+		dash_able = true
 	else:
 		jump_able = false
 
@@ -57,11 +62,22 @@ func _physics_process(delta):
 		velocity = velocity.move_toward(Vector2(max_speed, velocity.y), acceleration*delta)
 	if velocity.x < -max_speed:
 		velocity = velocity.move_toward(Vector2(-max_speed, velocity.y), acceleration*delta)
+	if velocity.y > max_vertical_speed:
+		velocity = velocity.move_toward(Vector2(velocity.x, max_vertical_speed), acceleration*delta)
+	if velocity.y < -max_vertical_speed:
+		velocity = velocity.move_toward(Vector2(velocity.x, -max_vertical_speed), acceleration*delta)
 
 	
-	if jump_input and jump_able:
+	if jump_input == 1 and jump_able:
 		velocity.y = -jump_force * meter_unit
 		jump_able = false
+
+	if dashing:
+		velocity = Vector2(r_input - l_input, d_input - jump_input) * max_speed
+		velocity *= dash_mult
+		dashing = false
+		dash_able = false
+		$DashTimer.start()
 
 	velocity = move_and_slide(velocity, Vector2.UP)
 
@@ -81,13 +97,23 @@ func _unhandled_input(event):
 			l_input = 0
 	if event.is_action("jump"):
 		if event.is_pressed():
-			jump_input = true
+			jump_input = 1
 		else:
-			jump_input = false
+			jump_input = 0
+	
+	if event.is_action("move_down"):
+		if event.is_pressed():
+			d_input = 1
+		else:
+			d_input = 0
 	
 	if event.is_action("shoot"):
 		if event.is_pressed():
 			gun.get_node("Receiver").create_projectile($HurtBox.team, get_global_mouse_position())
+	
+	if event.is_action_pressed("dash"):
+		if dash_able and $DashTimer.is_stopped():
+			dashing = true
 	
 	if event.is_action("interact"):
 		if event.is_pressed():
