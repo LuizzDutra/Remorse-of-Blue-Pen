@@ -15,3 +15,5 @@ func _unhandled_input(event):
 			var hub = hub_scene.instance()
 			add_child(hub)
 			hub.connect("level_entered", self, "_on_Hub_level_entered")
+		elif event.is_pressed() and has_node("Hub"):
+			get_tree().change_scene("res://Base.tscn")
