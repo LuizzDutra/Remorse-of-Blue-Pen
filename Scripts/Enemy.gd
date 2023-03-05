@@ -21,6 +21,7 @@ func _ready():
 	detect_cast.target_top = player.get_node("top")
 	$HurtBox.team = "enemy"
 
+
 func _physics_process(delta):
 	if dead:
 		queue_free()
@@ -87,8 +88,8 @@ func _on_ShootTimer_timeout():
 
 func _on_AlertTimer_timeout():
 	State = ATTENTION_STATE
-	detect_cast.facing = int(ceil(detect_cast.target_last_seen_pos.normalized().x))
-	
+	var cast_rel_positon = detect_cast.target_last_seen_pos - detect_cast.global_position
+	detect_cast.facing = int(abs(cast_rel_positon.x)/cast_rel_positon.x)
 
 
 func _on_IdleTimer_timeout():
