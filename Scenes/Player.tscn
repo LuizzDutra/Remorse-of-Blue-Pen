@@ -35,6 +35,7 @@ __meta__ = {
 
 [node name="Receiver" type="Node2D" parent="Gun"]
 script = ExtResource( 3 )
+speed = 2400
 
 [node name="Sprite" type="Sprite" parent="Gun"]
 
