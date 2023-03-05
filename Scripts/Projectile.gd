@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var parent_area
+var team = "None"
 
 var velocity: Vector2 = Vector2.ZERO
 var pen_type: int = 0
@@ -17,7 +17,7 @@ func _physics_process(delta):
 
 
 func _on_ProjArea_area_entered(area:Area2D):
-	if not area in entered_bodies and area != parent_area:
+	if not area in entered_bodies and area.team != team:
 		entered_bodies.append(area)
 		if area.name == "HurtBox":
 			area.hit(damage, penetration)

@@ -27,6 +27,8 @@ var jump_able = false
 
 var facing = 1
 
+func _ready():
+	$HurtBox.team = "player"
 
 func _physics_process(delta):
 	if is_on_floor():
@@ -85,7 +87,7 @@ func _unhandled_input(event):
 	
 	if event.is_action("shoot"):
 		if event.is_pressed():
-			gun.get_node("Receiver").create_projectile($HurtBox, get_global_mouse_position())
+			gun.get_node("Receiver").create_projectile($HurtBox.team, get_global_mouse_position())
 	
 	if event.is_action("interact"):
 		if event.is_pressed():
