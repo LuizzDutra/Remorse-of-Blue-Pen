@@ -37,6 +37,7 @@ __meta__ = {
 
 [node name="Receiver" type="Node2D" parent="EnemyGun"]
 script = ExtResource( 3 )
+speed = 700
 
 [node name="Sprite" type="Sprite" parent="EnemyGun"]
 
@@ -66,5 +67,20 @@ facing = -1
 wait_time = 0.8
 one_shot = true
 
+[node name="IdleTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="AlertTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="AttentionTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
 [connection signal="got_hit" from="HurtBox" to="." method="_on_HurtBox_got_hit"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
+[connection signal="timeout" from="IdleTimer" to="." method="_on_IdleTimer_timeout"]
+[connection signal="timeout" from="AlertTimer" to="." method="_on_AlertTimer_timeout"]
+[connection signal="timeout" from="AttentionTimer" to="." method="_on_AttentionTimer_timeout"]
