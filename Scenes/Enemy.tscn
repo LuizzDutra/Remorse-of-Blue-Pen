@@ -12,7 +12,6 @@ extents = Vector2( 16, 32 )
 extents = Vector2( 16, 32 )
 
 [node name="Enemy" type="KinematicBody2D"]
-position = Vector2( -311, 88 )
 collision_layer = 0
 script = ExtResource( 2 )
 

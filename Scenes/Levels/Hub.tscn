@@ -12,6 +12,7 @@ extents = Vector2( 639, 27 )
 script = ExtResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( -88, 84 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2( 11, 132 )
@@ -24,6 +25,7 @@ __meta__ = {
 shape = SubResource( 1 )
 
 [node name="Enemy" parent="." instance=ExtResource( 2 )]
+position = Vector2( -542, 86 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -31,4 +33,5 @@ __meta__ = {
 [node name="LevelAreas" type="Node2D" parent="."]
 
 [node name="LevelEnterArea" parent="LevelAreas" instance=ExtResource( 3 )]
+position = Vector2( 252, 45 )
 level_name = "Level"
