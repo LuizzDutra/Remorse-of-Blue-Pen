@@ -19,6 +19,7 @@ func _ready():
 	detect_cast.target = player
 	detect_cast.target_bottom = player.get_node("bottom")
 	detect_cast.target_top = player.get_node("top")
+	$HurtBox.team = "enemy"
 
 func _physics_process(delta):
 	if dead:
@@ -52,7 +53,7 @@ func attack_routine():
 
 
 func shoot():
-	gun.get_node("Receiver").create_projectile($HurtBox, detect_cast.target_last_seen_pos)
+	gun.get_node("Receiver").create_projectile($HurtBox.team, detect_cast.target_last_seen_pos)
 
 
 func _on_HurtBox_got_hit(dam, pen):
