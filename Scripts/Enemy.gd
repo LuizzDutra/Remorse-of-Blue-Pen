@@ -11,6 +11,10 @@ export var health = 100 setget set_health
 export var armor = 10
 export var speed = 200
 
+var meter_unit = 64
+var gravity:Vector2 = Vector2(0, 9.8)
+var velocity = Vector2.ZERO
+
 enum {IDLE_STATE, ATTENTION_STATE, ALERT_STATE, ATTACK_STATE}
 
 var State = IDLE_STATE
@@ -37,6 +41,14 @@ func _physics_process(delta):
 			alert_routine()
 		ATTACK_STATE:
 			attack_routine()
+			
+	velocity.x = 0
+	if State == ATTENTION_STATE:
+		velocity.x = speed * detect_cast.facing
+	
+	velocity += gravity * meter_unit * delta
+	
+	velocity = move_and_slide(velocity)
 
 
 func idle_routine():
@@ -74,6 +86,8 @@ func shoot():
 
 func _on_HurtBox_got_hit(dam, pen):
 	var resulting_damage = dam - (armor - pen)
+	if State != ATTACK_STATE:
+		State = ALERT_STATE
 	set_health(health - resulting_damage)
 
 
