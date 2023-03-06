@@ -14,10 +14,10 @@ export var acceleration: float = 3600
 export var friction: float = 1800
 export var max_speed: float = 600
 export var max_vertical_speed: float = 500
-export var gravity: float = 9.8
-export var jump_force = 5
+export var gravity: float = 9.8 * 4
+export var jump_force = 20
 export var dash_mult = 1.25
-var meter_unit = 64
+var meter_unit = 32
 
 var l_input = 0
 var r_input = 0
