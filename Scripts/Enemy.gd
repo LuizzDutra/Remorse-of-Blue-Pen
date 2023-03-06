@@ -10,6 +10,7 @@ var dead = false
 export var health = 100 setget set_health
 export var armor = 10
 export var speed = 200
+export var jump_force = 4
 
 var meter_unit = 64
 var gravity:Vector2 = Vector2(0, 9.8)
@@ -48,7 +49,11 @@ func _physics_process(delta):
 	
 	velocity += gravity * meter_unit * delta
 	
-	velocity = move_and_slide(velocity)
+	if State == ATTENTION_STATE and ($RightJumpCast.is_colliding() or $LeftJumpCast.is_colliding()) and is_on_floor():
+		velocity.y = -jump_force * meter_unit
+	
+	velocity = move_and_slide(velocity, Vector2.UP)
+	
 
 
 func idle_routine():

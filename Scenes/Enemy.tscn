@@ -78,6 +78,14 @@ one_shot = true
 wait_time = 4.0
 one_shot = true
 
+[node name="RightJumpCast" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 35, 0 )
+
+[node name="LeftJumpCast" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( -35, 0 )
+
 [connection signal="got_hit" from="HurtBox" to="." method="_on_HurtBox_got_hit"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
 [connection signal="timeout" from="IdleTimer" to="." method="_on_IdleTimer_timeout"]
