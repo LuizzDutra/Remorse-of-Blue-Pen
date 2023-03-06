@@ -16,11 +16,13 @@ format = 1
 tile_data = PoolIntArray( 262139, 1, 0, 262140, 1, 0, 262141, 1, 0, 262142, 1, 0, 262143, 1, 0, 196608, 1, 0, 196609, 1, 0, 196610, 1, 0, 196611, 1, 0, 196612, 1, 0 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scale = Vector2( 0.6, 0.6 )
+transform = Transform2D( 0.6, 0, 0, 0.6, 0, 0 )
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2( 0.2, 0.1 )
-motion_offset = Vector2( 0, -650 )
-motion_mirroring = Vector2( 1920, 0 )
+motion_offset = Vector2( 0, -390 )
+motion_mirroring = Vector2( 1152, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 scale = Vector2( 1.5, 1.5 )
