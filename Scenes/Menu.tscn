@@ -22,12 +22,14 @@ rect_scale = Vector2( 3, 3 )
 [node name="StartButton" type="Button" parent="GridContainer"]
 margin_right = 41.0
 margin_bottom = 20.0
+focus_neighbour_bottom = NodePath("../ExitButton")
 text = "Start"
 
 [node name="ExitButton" type="Button" parent="GridContainer"]
 margin_top = 24.0
 margin_right = 41.0
 margin_bottom = 44.0
+focus_neighbour_top = NodePath("../StartButton")
 text = "Exit"
 
 [connection signal="pressed" from="GridContainer/StartButton" to="." method="_on_StartButton_pressed"]
