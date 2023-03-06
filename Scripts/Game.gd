@@ -2,6 +2,8 @@ extends Node
 
 var hub_scene = load("res://Scenes/Levels/Hub.tscn")
 
+onready var menu = $CanvasLayer/Menu
+
 func _on_Hub_level_entered(loaded_level):
 	$Hub.queue_free()
 	add_child(loaded_level.instance())
@@ -9,11 +11,24 @@ func _on_Hub_level_entered(loaded_level):
 
 func _unhandled_input(event):
 	if event.is_action("ui_cancel"):
-		if event.is_pressed() and not has_node("Hub"):
-			for i in get_children():
-				i.queue_free()
-			var hub = hub_scene.instance()
-			add_child(hub)
-			hub.connect("level_entered", self, "_on_Hub_level_entered")
-		elif event.is_pressed() and has_node("Hub"):
-			get_tree().change_scene("res://Base.tscn")
+		if event.is_pressed():
+			if menu.visible:
+				menu.visible = false
+			elif not menu.visible:
+				menu.visible = true
+				if has_node("Hub"):
+					menu.get_node("GridContainer/BackToHub").visible = false
+				else:
+					menu.get_node("GridContainer/BackToHub").visible = true
+
+
+func _on_BackToMenu_pressed():
+	get_tree().change_scene("res://Base.tscn")
+
+
+func _on_BackToHub_pressed():
+	get_tree().change_scene("res://Scenes/Game.tscn")
+
+
+func _on_Return_pressed():
+	menu.visible = false

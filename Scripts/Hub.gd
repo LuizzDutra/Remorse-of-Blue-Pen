@@ -3,7 +3,6 @@ extends Node
 signal level_entered(loaded_level)
 
 func _ready():
-	print("ha")
 	for area in $LevelAreas.get_children():
 		area.connect("level_entered", self, "_on_LevelEnterArea_level_entered")
 
