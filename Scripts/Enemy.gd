@@ -10,7 +10,7 @@ var dead = false
 export var health = 100 setget set_health
 export var armor = 10
 export var speed = 200
-export var jump_force = 4
+export var jump_force = 8
 
 var meter_unit = 32
 var gravity:Vector2 = Vector2(0, 9.8*2)
