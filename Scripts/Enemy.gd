@@ -12,8 +12,8 @@ export var armor = 10
 export var speed = 200
 export var jump_force = 4
 
-var meter_unit = 64
-var gravity:Vector2 = Vector2(0, 9.8)
+var meter_unit = 32
+var gravity:Vector2 = Vector2(0, 9.8*2)
 var velocity = Vector2.ZERO
 
 enum {IDLE_STATE, ATTENTION_STATE, ALERT_STATE, ATTACK_STATE}
