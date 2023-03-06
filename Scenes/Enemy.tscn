@@ -12,7 +12,6 @@ extents = Vector2( 16, 32 )
 extents = Vector2( 16, 32 )
 
 [node name="Enemy" type="KinematicBody2D"]
-position = Vector2( -311, 88 )
 collision_layer = 0
 script = ExtResource( 2 )
 
@@ -37,7 +36,7 @@ __meta__ = {
 
 [node name="Receiver" type="Node2D" parent="EnemyGun"]
 script = ExtResource( 3 )
-speed = 700
+speed = 900
 
 [node name="Sprite" type="Sprite" parent="EnemyGun"]
 
