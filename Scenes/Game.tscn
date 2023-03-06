@@ -49,7 +49,7 @@ margin_right = 99.0
 margin_bottom = 20.0
 focus_neighbour_top = NodePath("../BackToMenu")
 focus_neighbour_bottom = NodePath("../BackToHub")
-text = "Return"
+text = "Restart"
 
 [node name="BackToHub" type="Button" parent="CanvasLayer/GameMenu/GridContainer"]
 margin_top = 24.0

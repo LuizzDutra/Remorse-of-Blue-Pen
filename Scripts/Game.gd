@@ -4,9 +4,14 @@ var hub_scene = load("res://Scenes/Levels/Hub.tscn")
 
 onready var menu = $CanvasLayer/GameMenu
 
+var cur_level = null
+var cur_level_pack = null
+
 func _on_Hub_level_entered(loaded_level):
 	$Hub.queue_free()
-	add_child(loaded_level.instance())
+	cur_level_pack = loaded_level
+	cur_level = loaded_level.instance()
+	add_child(cur_level)
 
 func _unhandled_input(event):
 	if event.is_action("ui_cancel"):
@@ -36,3 +41,10 @@ func _on_BackToHub_pressed():
 func _on_Return_pressed():
 	menu.visible = false
 	get_tree().paused = false
+	if has_node("Hub"):
+		get_tree().change_scene("res://Scenes/Game.tscn")
+	else:
+		remove_child(cur_level)
+		cur_level = cur_level_pack.instance()
+		add_child(cur_level)
+	
