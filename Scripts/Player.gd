@@ -135,6 +135,7 @@ func _unhandled_input(event):
 
 func _on_HurtBox_got_hit(dam, _pen):
 	set_health(health - dam)
+	$hit_sound.play()
 
 
 func set_health(value):

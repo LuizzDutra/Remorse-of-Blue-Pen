@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Player/correndo_blen_pun.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scripts/HurtBox.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Sprites/Player/cabeca_do_pen_blue.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Sprites/Player/blue_pen_paradinho_meus_amigus.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sounds/bluepen_hit.mp3" type="AudioStream" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 32 )
@@ -92,6 +93,10 @@ texture = ExtResource( 6 )
 offset = Vector2( 6, 7 )
 hframes = 3
 frame = 2
+
+[node name="hit_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 7 )
+bus = "SFX"
 
 [connection signal="got_hit" from="HurtBox" to="." method="_on_HurtBox_got_hit"]
 [connection signal="got_hit" from="DetectArea" to="." method="_on_HurtBox_got_hit"]
