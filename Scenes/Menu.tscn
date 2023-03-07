@@ -20,21 +20,33 @@ margin_bottom = 20.0
 rect_scale = Vector2( 3, 3 )
 
 [node name="StartButton" type="Button" parent="GridContainer"]
-margin_right = 41.0
+margin_right = 63.0
 margin_bottom = 20.0
-focus_neighbour_bottom = NodePath("../ExitButton")
+focus_neighbour_bottom = NodePath("../OptionButton")
 text = "Start"
 
-[node name="ExitButton" type="Button" parent="GridContainer"]
+[node name="OptionButton" type="Button" parent="GridContainer"]
 margin_top = 24.0
-margin_right = 41.0
+margin_right = 63.0
 margin_bottom = 44.0
 focus_neighbour_top = NodePath("../StartButton")
+focus_neighbour_bottom = NodePath("../ExitButton")
+text = "Options"
+
+[node name="ExitButton" type="Button" parent="GridContainer"]
+margin_top = 48.0
+margin_right = 63.0
+margin_bottom = 68.0
+focus_neighbour_top = NodePath("../OptionButton")
+focus_neighbour_bottom = NodePath("../StartButton")
 text = "Exit"
 
 [connection signal="focus_entered" from="GridContainer/StartButton" to="." method="_on_StartButton_focus_entered"]
 [connection signal="mouse_entered" from="GridContainer/StartButton" to="." method="_on_StartButton_mouse_entered"]
 [connection signal="pressed" from="GridContainer/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="focus_entered" from="GridContainer/OptionButton" to="." method="_on_OptionButton_focus_entered"]
+[connection signal="mouse_entered" from="GridContainer/OptionButton" to="." method="_on_OptionButton_mouse_entered"]
+[connection signal="pressed" from="GridContainer/OptionButton" to="." method="_on_OptionButton_pressed"]
 [connection signal="focus_entered" from="GridContainer/ExitButton" to="." method="_on_ExitButton_focus_entered"]
 [connection signal="mouse_entered" from="GridContainer/ExitButton" to="." method="_on_ExitButton_mouse_entered"]
 [connection signal="pressed" from="GridContainer/ExitButton" to="." method="_on_ExitButton_pressed"]
