@@ -51,8 +51,20 @@ func _physics_process(delta):
 	elif facing == 0:
 		facing = 1
 
-	$Body.rect_scale.x = facing
-
+	#Sprites code
+	$Body.scale.x = facing
+	$Arm.scale.x = facing
+	$Arm.rotation = (get_global_mouse_position() - global_position).angle()
+	$Arm.position.x = abs($Arm.position.x) * -facing
+	
+	#f rad2deg($Arm.rotation) > 90 or rad2deg($Arm.rotation) < -90:
+	#	$Arm.scale.x = -1
+	#else:
+	#	$Arm.scale.x = 1
+	
+	$Arm.rotation -= deg2rad(90)
+	
+	
 	velocity.y += gravity * meter_unit * delta
 	velocity += dir * acceleration * delta
 

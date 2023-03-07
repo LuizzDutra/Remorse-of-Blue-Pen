@@ -109,6 +109,8 @@ func _on_ShootTimer_timeout():
 
 func _on_AlertTimer_timeout():
 	State = ATTENTION_STATE
+	if detect_cast.target_last_seen_pos == null:
+		detect_cast.target_last_seen_pos = detect_cast.target_pos
 	var cast_rel_positon = detect_cast.target_last_seen_pos - detect_cast.global_position
 	detect_cast.facing = int(abs(cast_rel_positon.x)/cast_rel_positon.x)
 
