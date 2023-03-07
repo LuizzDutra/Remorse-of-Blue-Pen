@@ -37,3 +37,18 @@ func _on_GameMenu_restart():
 
 func _on_reset():
 	_on_GameMenu_restart()
+
+
+func _on_GameMenu_options():
+	get_tree().paused = true
+	$CanvasLayer/GameMenu.visible = false
+	$CanvasLayer/Options.visible = true
+
+
+func _on_Options_options_return():
+	get_tree().paused = true
+	if has_node("Hub"):
+		menu.set_visibility(true, false)
+	else:
+		menu.set_visibility(true, true)
+	$CanvasLayer/Options.visible = false

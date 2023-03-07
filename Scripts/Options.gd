@@ -11,6 +11,12 @@ func _ready():
 	$GridContainer/SFXSlider.value = db2linear(AudioServer.get_bus_volume_db(2))
 	$GridContainer/FullScreenBox.pressed = OS.window_fullscreen
 
+func _input(event):
+	if event.is_action("ui_cancel"):
+		if event.is_pressed() and visible:
+			emit_signal("options_return")
+			get_tree().set_input_as_handled()
+
 func _on_ReturnButton_pressed():
 	sound_button.load_and_play(sound_button.press_sound)
 	emit_signal("options_return")
