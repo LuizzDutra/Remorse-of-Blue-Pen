@@ -9,6 +9,7 @@ func _ready():
 	$GridContainer/MasterSlider.value = db2linear(AudioServer.get_bus_volume_db(0))
 	$GridContainer/MusicSlider.value = db2linear(AudioServer.get_bus_volume_db(1))
 	$GridContainer/SFXSlider.value = db2linear(AudioServer.get_bus_volume_db(2))
+	$GridContainer/FullScreenBox.pressed = OS.window_fullscreen
 
 func _on_ReturnButton_pressed():
 	sound_button.load_and_play(sound_button.press_sound)
@@ -35,5 +36,5 @@ func _on_SFXSlider_value_changed(value):
 	AudioServer.set_bus_volume_db(2, linear2db(value))
 
 
-func _on_CheckBox_toggled(button_pressed):
+func _on_FullScreenBox_toggled(button_pressed):
 	OS.window_fullscreen = button_pressed
