@@ -81,4 +81,6 @@ func _on_OptionsButton_mouse_entered():
 	button_sound.load_and_play(button_sound.hover_sound)
 
 
-
+func _on_Button_pressed():
+	get_tree().paused = false
+	visible = false

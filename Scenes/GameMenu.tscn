@@ -3,7 +3,6 @@
 [ext_resource path="res://Scripts/GameMenu.gd" type="Script" id=1]
 
 [node name="GameMenu" type="Control"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
@@ -17,6 +16,16 @@ margin_left = -240.0
 margin_top = -225.0
 margin_right = 240.0
 margin_bottom = 225.0
+
+[node name="Button" type="Button" parent="Panel"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_right = -40.0
+margin_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+rect_scale = Vector2( 3, 3 )
+text = "X"
 
 [node name="GridContainer" type="GridContainer" parent="."]
 anchor_left = 0.5
@@ -65,6 +74,7 @@ focus_neighbour_top = NodePath("../BackToHub")
 focus_neighbour_bottom = NodePath("../Restart")
 text = "Back to Menu"
 
+[connection signal="pressed" from="Panel/Button" to="." method="_on_Button_pressed"]
 [connection signal="focus_entered" from="GridContainer/Restart" to="." method="_on_Restart_focus_entered"]
 [connection signal="mouse_entered" from="GridContainer/Restart" to="." method="_on_Restart_mouse_entered"]
 [connection signal="pressed" from="GridContainer/Restart" to="." method="_on_Restart_pressed"]

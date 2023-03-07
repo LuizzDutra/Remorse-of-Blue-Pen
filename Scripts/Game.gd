@@ -43,6 +43,7 @@ func _on_GameMenu_options():
 	get_tree().paused = true
 	$CanvasLayer/GameMenu.visible = false
 	$CanvasLayer/Options.visible = true
+	$CanvasLayer/Options/ReturnButton.grab_focus()
 
 
 func _on_Options_options_return():

@@ -14,6 +14,7 @@ script = ExtResource( 3 )
 pause_mode = 2
 
 [node name="GameMenu" parent="CanvasLayer" instance=ExtResource( 2 )]
+visible = false
 
 [node name="Options" parent="CanvasLayer" instance=ExtResource( 4 )]
 visible = false
