@@ -32,5 +32,9 @@ margin_bottom = 44.0
 focus_neighbour_top = NodePath("../StartButton")
 text = "Exit"
 
+[connection signal="focus_entered" from="GridContainer/StartButton" to="." method="_on_StartButton_focus_entered"]
+[connection signal="mouse_entered" from="GridContainer/StartButton" to="." method="_on_StartButton_mouse_entered"]
 [connection signal="pressed" from="GridContainer/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="focus_entered" from="GridContainer/ExitButton" to="." method="_on_ExitButton_focus_entered"]
+[connection signal="mouse_entered" from="GridContainer/ExitButton" to="." method="_on_ExitButton_mouse_entered"]
 [connection signal="pressed" from="GridContainer/ExitButton" to="." method="_on_ExitButton_pressed"]

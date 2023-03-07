@@ -35,3 +35,6 @@ __meta__ = {
 [node name="LevelEnterArea" parent="LevelAreas" instance=ExtResource( 3 )]
 position = Vector2( 252, 45 )
 level_name = "Level"
+
+[node name="HubMusic" type="AudioStreamPlayer" parent="."]
+autoplay = true

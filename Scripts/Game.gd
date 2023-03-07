@@ -27,24 +27,10 @@ func _unhandled_input(event):
 					menu.set_visibility(true, true)
 				
 
-
-func _on_BackToMenu_pressed():
-	get_tree().paused = false
-	get_tree().change_scene("res://Base.tscn")
-
-
-func _on_BackToHub_pressed():
-	get_tree().paused = false
-	get_tree().change_scene("res://Scenes/Game.tscn")
-
-
-func _on_Return_pressed():
-	menu.visible = false
-	get_tree().paused = false
+func _on_GameMenu_restart():
 	if has_node("Hub"):
 		get_tree().change_scene("res://Scenes/Game.tscn")
 	else:
 		remove_child(cur_level)
 		cur_level = cur_level_pack.instance()
 		add_child(cur_level)
-	
