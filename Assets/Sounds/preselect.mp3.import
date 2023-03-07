@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/preselect.mp3-e174ef2ad6f9b814514450de93cdee1b.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/preselect.mp3"
+dest_files=[ "res://.import/preselect.mp3-e174ef2ad6f9b814514450de93cdee1b.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,11 +1,24 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Base.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Menu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Sounds/bluepen_menu_pronto..mp3" type="AudioStream" id=3]
+[ext_resource path="res://Scenes/Options.tscn" type="PackedScene" id=4]
 
 [node name="Base" type="Node"]
 script = ExtResource( 1 )
 
 [node name="Menu" parent="." instance=ExtResource( 2 )]
+mouse_filter = 2
 
+[node name="MainMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+autoplay = true
+bus = "Music"
+
+[node name="Options" parent="." instance=ExtResource( 4 )]
+visible = false
+
+[connection signal="options_pressed" from="Menu" to="." method="_on_Menu_options_pressed"]
 [connection signal="start_game" from="Menu" to="." method="_on_Menu_start_game"]
+[connection signal="options_return" from="Options" to="." method="_on_Options_options_return"]

@@ -1,0 +1,93 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Options.gd" type="Script" id=1]
+
+[node name="Options" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 1 )
+
+[node name="GridContainer" type="GridContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -139.704
+margin_top = -204.987
+margin_right = -45.704
+margin_bottom = -66.987
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 3, 3 )
+
+[node name="CheckBox" type="CheckBox" parent="GridContainer"]
+margin_right = 94.0
+margin_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Fullscreen"
+align = 1
+
+[node name="MasterLabel" type="Label" parent="GridContainer"]
+margin_top = 28.0
+margin_right = 94.0
+margin_bottom = 42.0
+text = "Master"
+align = 1
+
+[node name="MasterSlider" type="HSlider" parent="GridContainer"]
+margin_top = 46.0
+margin_right = 94.0
+margin_bottom = 62.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="MusicLabel" type="Label" parent="GridContainer"]
+margin_top = 66.0
+margin_right = 94.0
+margin_bottom = 80.0
+text = "Music"
+align = 1
+
+[node name="MusicSlider" type="HSlider" parent="GridContainer"]
+margin_top = 84.0
+margin_right = 94.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="SFXLabel" type="Label" parent="GridContainer"]
+margin_top = 104.0
+margin_right = 94.0
+margin_bottom = 118.0
+text = "Sound Effects"
+align = 1
+
+[node name="SFXSlider" type="HSlider" parent="GridContainer"]
+margin_top = 122.0
+margin_right = 94.0
+margin_bottom = 138.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="ReturnButton" type="Button" parent="."]
+anchor_left = 0.05
+anchor_top = 0.9
+anchor_right = 0.05
+anchor_bottom = 0.9
+margin_top = -20.0
+margin_right = 12.0
+rect_scale = Vector2( 3, 3 )
+text = "Return"
+
+[connection signal="toggled" from="GridContainer/CheckBox" to="." method="_on_CheckBox_toggled"]
+[connection signal="value_changed" from="GridContainer/MasterSlider" to="." method="_on_MasterSlider_value_changed"]
+[connection signal="value_changed" from="GridContainer/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
+[connection signal="value_changed" from="GridContainer/SFXSlider" to="." method="_on_SFXSlider_value_changed"]
+[connection signal="focus_entered" from="ReturnButton" to="." method="_on_ReturnButton_focus_entered"]
+[connection signal="mouse_entered" from="ReturnButton" to="." method="_on_ReturnButton_mouse_entered"]
+[connection signal="pressed" from="ReturnButton" to="." method="_on_ReturnButton_pressed"]
