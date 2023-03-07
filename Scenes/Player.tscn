@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Player/correndo_blen_pun.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Assets/Sprites/Player/cabeca_do_pen_blue.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Sprites/Player/blue_pen_paradinho_meus_amigus.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Sounds/bluepen_hit.mp3" type="AudioStream" id=7]
+[ext_resource path="res://Assets/Sounds/player_hit_impact.wav" type="AudioStream" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 32 )
@@ -98,5 +99,20 @@ frame = 2
 stream = ExtResource( 7 )
 bus = "SFX"
 
+[node name="hit_sound_impact" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+volume_db = 15.732
+pitch_scale = 0.3
+bus = "SFX"
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="DeathResetTimer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+
 [connection signal="got_hit" from="HurtBox" to="." method="_on_HurtBox_got_hit"]
 [connection signal="got_hit" from="DetectArea" to="." method="_on_HurtBox_got_hit"]
+[connection signal="timeout" from="DeathResetTimer" to="." method="_on_DeathResetTimer_timeout"]

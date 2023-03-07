@@ -12,6 +12,7 @@ func _on_Hub_level_entered(loaded_level):
 	cur_level_pack = loaded_level
 	cur_level = loaded_level.instance()
 	add_child(cur_level)
+	cur_level.connect("reset", self, "_on_reset")
 
 func _unhandled_input(event):
 	if event.is_action("ui_cancel"):
@@ -32,3 +33,7 @@ func _on_GameMenu_restart():
 		remove_child(cur_level)
 		cur_level = cur_level_pack.instance()
 		add_child(cur_level)
+		cur_level.connect("reset", self, "_on_reset")
+
+func _on_reset():
+	_on_GameMenu_restart()

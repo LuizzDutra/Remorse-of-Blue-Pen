@@ -38,3 +38,5 @@ level_name = "Level"
 
 [node name="HubMusic" type="AudioStreamPlayer" parent="."]
 autoplay = true
+
+[connection signal="died" from="Player" to="." method="_on_Player_died"]

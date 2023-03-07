@@ -20,7 +20,7 @@ func _on_ProjArea_area_entered(area:Area2D):
 	if not area in entered_bodies and area.team != team:
 		entered_bodies.append(area)
 		if area.name == "HurtBox":
-			area.hit(damage, penetration)
+			area.hit(damage, penetration, global_position)
 		match pen_type:
 			0:
 				queue_free()

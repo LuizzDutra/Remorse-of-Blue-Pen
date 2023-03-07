@@ -15,4 +15,5 @@ pause_mode = 2
 [node name="GameMenu" parent="CanvasLayer" instance=ExtResource( 2 )]
 
 [connection signal="level_entered" from="Hub" to="." method="_on_Hub_level_entered"]
+[connection signal="reset" from="Hub" to="." method="_on_reset"]
 [connection signal="restart" from="CanvasLayer/GameMenu" to="." method="_on_GameMenu_restart"]

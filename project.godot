@@ -39,6 +39,7 @@ config/icon="res://icon.png"
 [autoload]
 
 ButtonSound="*res://Scripts/autoloads/ButtonSound.gd"
+Slowdown="*res://Scripts/autoloads/slowdown.gd"
 
 [debug]
 

@@ -7,8 +7,8 @@ onready var shoot_timer = $ShootTimer
 
 var dead = false
 
-export var health = 100 setget set_health
-export var armor = 10
+export var health = 1 setget set_health
+export var armor = 0
 export var speed = 200
 export var jump_force = 6
 
@@ -91,7 +91,7 @@ func shoot():
 	gun.get_node("Receiver").create_projectile($HurtBox.team, detect_cast.target_last_seen_pos)
 
 
-func _on_HurtBox_got_hit(dam, pen):
+func _on_HurtBox_got_hit(dam, pen, _hit_position):
 	var resulting_damage = dam - (armor - pen)
 	if State != ATTACK_STATE:
 		State = ALERT_STATE
