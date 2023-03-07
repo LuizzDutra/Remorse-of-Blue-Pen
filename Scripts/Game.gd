@@ -16,15 +16,13 @@ func _on_Hub_level_entered(loaded_level):
 func _unhandled_input(event):
 	if event.is_action("ui_cancel"):
 		if event.is_pressed():
-			if menu.visible:
-				get_tree().paused = false
-				menu.set_visibility(false, true)
-			elif not menu.visible:
+			if not menu.visible:
 				get_tree().paused = true
 				if has_node("Hub"):
 					menu.set_visibility(true, false)
 				else:
 					menu.set_visibility(true, true)
+		get_tree().set_input_as_handled()
 				
 
 func _on_GameMenu_restart():

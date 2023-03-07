@@ -18,6 +18,13 @@ func set_visibility(vis:bool, in_level: bool):
 		$GridContainer/BackToMenu.focus_neighbour_top = "../Restart"
 		$GridContainer/BackToHub.visible = false
 
+func _input(event):
+	if event.is_action("ui_cancel"):
+		if event.is_pressed() and visible:
+			get_tree().paused = false
+			visible = false
+			get_tree().set_input_as_handled()
+
 func _on_BackToMenu_pressed():
 	button_sound.load_and_play(button_sound.press_sound)
 	get_tree().paused = false
