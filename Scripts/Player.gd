@@ -17,8 +17,10 @@ export var friction: float = 1800
 export var max_speed: float = 600
 export var max_vertical_speed: float = 800
 export var gravity: float = 9.8 * 4
-export var jump_force = 20
+export var jump_force = 15
 export var dash_mult = 1.25
+export var dash_x_mult = 1.5
+export var dash_y_mult = 0.75
 var meter_unit = 32
 
 var l_input = 0
@@ -88,7 +90,8 @@ func _physics_process(delta):
 	if dashing and not dead:
 		velocity = Vector2(r_input - l_input, d_input - jump_input) * max_speed
 		velocity *= dash_mult
-		velocity.x *= 1.5
+		velocity.x *= dash_x_mult
+		velocity.y *= dash_y_mult
 		dashing = false
 		dash_able = false
 		$DashTimer.start()
