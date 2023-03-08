@@ -16,6 +16,8 @@ func _physics_process(delta):
 		queue_free()
 
 func parry(parrier_team):
+	$ColorRect.modulate = Color(1.5, 1.5, 1.5)
+	$ColorRect.color = Color(1, 0.1, 0)
 	velocity *= -1
 	team = parrier_team
 	#queue_free()

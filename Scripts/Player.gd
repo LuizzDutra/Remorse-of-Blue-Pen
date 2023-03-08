@@ -94,7 +94,7 @@ func _physics_process(delta):
 		$DashTimer.start()
 		
 	#parry
-	if parry_able:
+	if parry_able and not dead:
 		parry()
 
 	velocity = move_and_slide(velocity, Vector2.UP)
@@ -137,7 +137,7 @@ func _unhandled_input(event):
 		if event.is_pressed() and not dead:
 			interact_process()
 	
-	if not dead and event.is_action("parry"):
+	if event.is_action("parry"):
 		if event.is_pressed() and $ParryTimer.is_stopped() and $ParryDurationTimer.is_stopped():
 			parry_able = true
 			$ParryDurationTimer.start()
@@ -153,6 +153,7 @@ func parry():
 		$ParryDurationTimer.stop()
 		$ParryTimer.stop()
 		parry_able = false
+		slowdown.slowdown(0.5, 0.075)
 
 func shoot():
 	if $ShootTimer.is_stopped() and not dead:
