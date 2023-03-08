@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Player/correndo_blen_pun.png" type="Texture" id=2]
@@ -17,6 +17,9 @@ extents = Vector2( 16, 32 )
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 59.1354
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 67.72
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 0
@@ -57,6 +60,14 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource( 3 )
+
+[node name="ParryArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParryArea"]
+shape = SubResource( 4 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -105,6 +116,15 @@ one_shot = true
 wait_time = 0.6
 one_shot = true
 
+[node name="ParryTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="ParryDurationTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [connection signal="got_hit" from="HurtBox" to="." method="_on_HurtBox_got_hit"]
 [connection signal="got_hit" from="DetectArea" to="." method="_on_HurtBox_got_hit"]
 [connection signal="timeout" from="DeathResetTimer" to="." method="_on_DeathResetTimer_timeout"]
+[connection signal="timeout" from="ParryDurationTimer" to="." method="_on_ParryDurationTimer_timeout"]

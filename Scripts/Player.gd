@@ -33,6 +33,8 @@ var dashing = false
 
 var facing = 1
 
+var parry_able = false
+
 func _ready():
 	$HurtBox.team = "player"
 
@@ -90,6 +92,10 @@ func _physics_process(delta):
 		dashing = false
 		dash_able = false
 		$DashTimer.start()
+		
+	#parry
+	if parry_able:
+		parry()
 
 	velocity = move_and_slide(velocity, Vector2.UP)
 
@@ -130,6 +136,23 @@ func _unhandled_input(event):
 	if event.is_action("interact"):
 		if event.is_pressed() and not dead:
 			interact_process()
+	
+	if not dead and event.is_action("parry"):
+		if event.is_pressed() and $ParryTimer.is_stopped() and $ParryDurationTimer.is_stopped():
+			parry_able = true
+			$ParryDurationTimer.start()
+		
+
+func parry():
+	var parry_success = false
+	for area in $ParryArea.get_overlapping_areas():
+		if area.get_parent() != null and area.get_parent().has_method("parry"):
+			area.get_parent().parry("player")
+			parry_success = true
+	if parry_success:
+		$ParryDurationTimer.stop()
+		$ParryTimer.stop()
+		parry_able = false
 
 func shoot():
 	if $ShootTimer.is_stopped() and not dead:
@@ -177,3 +200,8 @@ func interact_process():#interaction
 
 func _on_DeathResetTimer_timeout():
 	emit_signal("died")
+
+
+func _on_ParryDurationTimer_timeout():
+	parry_able = false
+	$ParryTimer.start()

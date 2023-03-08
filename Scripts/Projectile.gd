@@ -15,6 +15,10 @@ func _physics_process(delta):
 	if collider:
 		queue_free()
 
+func parry(parrier_team):
+	velocity *= -1
+	team = parrier_team
+	#queue_free()
 
 func _on_ProjArea_area_entered(area:Area2D):
 	if not area in entered_bodies and area.team != team:
