@@ -15,12 +15,18 @@ func _physics_process(delta):
 	if collider:
 		queue_free()
 
+func parry(parrier_team):
+	$ColorRect.modulate = Color(1.5, 1.5, 1.5)
+	$ColorRect.color = Color(1, 0.1, 0)
+	velocity *= -1
+	team = parrier_team
+	#queue_free()
 
 func _on_ProjArea_area_entered(area:Area2D):
 	if not area in entered_bodies and area.team != team:
 		entered_bodies.append(area)
 		if area.name == "HurtBox":
-			area.hit(damage, penetration)
+			area.hit(damage, penetration, global_position)
 		match pen_type:
 			0:
 				queue_free()

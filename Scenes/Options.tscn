@@ -3,6 +3,7 @@
 [ext_resource path="res://Scripts/Options.gd" type="Script" id=1]
 
 [node name="Options" type="Control"]
+pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -21,7 +22,7 @@ grow_horizontal = 2
 grow_vertical = 2
 rect_scale = Vector2( 3, 3 )
 
-[node name="CheckBox" type="CheckBox" parent="GridContainer"]
+[node name="FullScreenBox" type="CheckBox" parent="GridContainer"]
 margin_right = 94.0
 margin_bottom = 24.0
 grow_horizontal = 2
@@ -84,7 +85,7 @@ margin_right = 12.0
 rect_scale = Vector2( 3, 3 )
 text = "Return"
 
-[connection signal="toggled" from="GridContainer/CheckBox" to="." method="_on_CheckBox_toggled"]
+[connection signal="toggled" from="GridContainer/FullScreenBox" to="." method="_on_FullScreenBox_toggled"]
 [connection signal="value_changed" from="GridContainer/MasterSlider" to="." method="_on_MasterSlider_value_changed"]
 [connection signal="value_changed" from="GridContainer/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
 [connection signal="value_changed" from="GridContainer/SFXSlider" to="." method="_on_SFXSlider_value_changed"]

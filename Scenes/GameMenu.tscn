@@ -3,7 +3,6 @@
 [ext_resource path="res://Scripts/GameMenu.gd" type="Script" id=1]
 
 [node name="GameMenu" type="Control"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
@@ -17,6 +16,16 @@ margin_left = -240.0
 margin_top = -225.0
 margin_right = 240.0
 margin_bottom = 225.0
+
+[node name="Button" type="Button" parent="Panel"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_right = -40.0
+margin_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+rect_scale = Vector2( 3, 3 )
+text = "X"
 
 [node name="GridContainer" type="GridContainer" parent="."]
 anchor_left = 0.5
@@ -38,28 +47,40 @@ __meta__ = {
 margin_right = 99.0
 margin_bottom = 20.0
 focus_neighbour_top = NodePath("../BackToMenu")
-focus_neighbour_bottom = NodePath("../BackToHub")
+focus_neighbour_bottom = NodePath("../OptionsButton")
 text = "Restart"
 
-[node name="BackToHub" type="Button" parent="GridContainer"]
+[node name="OptionsButton" type="Button" parent="GridContainer"]
 margin_top = 24.0
 margin_right = 99.0
 margin_bottom = 44.0
 focus_neighbour_top = NodePath("../Restart")
+focus_neighbour_bottom = NodePath("../BackToHub")
+text = "Options"
+
+[node name="BackToHub" type="Button" parent="GridContainer"]
+margin_top = 48.0
+margin_right = 99.0
+margin_bottom = 68.0
+focus_neighbour_top = NodePath("../OptionsButton")
 focus_neighbour_bottom = NodePath("../BackToMenu")
 text = "Back to Hub"
 
 [node name="BackToMenu" type="Button" parent="GridContainer"]
-margin_top = 48.0
+margin_top = 72.0
 margin_right = 99.0
-margin_bottom = 68.0
+margin_bottom = 92.0
 focus_neighbour_top = NodePath("../BackToHub")
 focus_neighbour_bottom = NodePath("../Restart")
 text = "Back to Menu"
 
+[connection signal="pressed" from="Panel/Button" to="." method="_on_Button_pressed"]
 [connection signal="focus_entered" from="GridContainer/Restart" to="." method="_on_Restart_focus_entered"]
 [connection signal="mouse_entered" from="GridContainer/Restart" to="." method="_on_Restart_mouse_entered"]
 [connection signal="pressed" from="GridContainer/Restart" to="." method="_on_Restart_pressed"]
+[connection signal="focus_entered" from="GridContainer/OptionsButton" to="." method="_on_OptionsButton_focus_entered"]
+[connection signal="mouse_entered" from="GridContainer/OptionsButton" to="." method="_on_OptionsButton_mouse_entered"]
+[connection signal="pressed" from="GridContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="focus_entered" from="GridContainer/BackToHub" to="." method="_on_BackToHub_focus_entered"]
 [connection signal="mouse_entered" from="GridContainer/BackToHub" to="." method="_on_BackToHub_mouse_entered"]
 [connection signal="pressed" from="GridContainer/BackToHub" to="." method="_on_BackToHub_pressed"]
