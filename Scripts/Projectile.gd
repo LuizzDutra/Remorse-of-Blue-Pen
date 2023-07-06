@@ -1,8 +1,7 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 var team = "None"
 
-var velocity: Vector2 = Vector2.ZERO
 var pen_type: int = 0
 
 var damage = 10

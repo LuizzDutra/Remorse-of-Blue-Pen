@@ -1,23 +1,29 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://dab3ear87mh36"]
 
-[ext_resource path="res://Base.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/Menu.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Sounds/bluepen_menu_pronto..mp3" type="AudioStream" id=3]
-[ext_resource path="res://Scenes/Options.tscn" type="PackedScene" id=4]
+[ext_resource type="Script" path="res://Base.gd" id="1"]
+[ext_resource type="PackedScene" path="res://Scenes/Menu.tscn" id="2"]
+[ext_resource type="AudioStream" uid="uid://cqgljbwq7lgkt" path="res://Assets/Sounds/bluepen_menu_pronto..mp3" id="3"]
+[ext_resource type="PackedScene" uid="uid://q4qbxe525pnk" path="res://Scenes/Options.tscn" id="4"]
 
 [node name="Base" type="Node"]
-script = ExtResource( 1 )
+script = ExtResource("1")
 
-[node name="Menu" parent="." instance=ExtResource( 2 )]
+[node name="Menu" parent="." instance=ExtResource("2")]
+layout_mode = 3
+anchors_preset = 15
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 
 [node name="MainMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
+stream = ExtResource("3")
 autoplay = true
-bus = "Music"
+bus = &"Music"
 
-[node name="Options" parent="." instance=ExtResource( 4 )]
+[node name="Options" parent="." instance=ExtResource("4")]
 visible = false
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="options_pressed" from="Menu" to="." method="_on_Menu_options_pressed"]
 [connection signal="start_game" from="Menu" to="." method="_on_Menu_start_game"]

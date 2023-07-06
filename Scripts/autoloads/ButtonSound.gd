@@ -7,7 +7,7 @@ var press_sound = load(press_path)
 var hover_sound = load(hover_path)
 
 func _ready():
-	pause_mode = Node.PAUSE_MODE_PROCESS
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	bus = "SFX"
 	stream = press_sound
 

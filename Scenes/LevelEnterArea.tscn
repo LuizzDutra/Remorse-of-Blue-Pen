@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/LevelEnterArea.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 35, 61.5 )
+size = Vector2( 35, 61.5 )
 
 [node name="LevelEnterArea" type="Area2D"]
 collision_layer = 4
@@ -18,10 +18,10 @@ position = Vector2( 0, -0.5 )
 shape = SubResource( 2 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = -35.0
-margin_top = -100.0
-margin_right = 34.0
-margin_bottom = -62.0
+offset_left = -35.0
+offset_top = -100.0
+offset_right = 34.0
+offset_bottom = -62.0
 text = "Level 1"
 align = 1
 valign = 1

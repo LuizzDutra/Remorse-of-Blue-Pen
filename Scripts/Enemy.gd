@@ -1,20 +1,19 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-onready var detect_cast = $DetectionCast
-onready var player = get_parent().get_node("Player")
-onready var gun = $EnemyGun
-onready var shoot_timer = $ShootTimer
+@onready var detect_cast = $DetectionCast
+@onready var player = get_parent().get_node("Player")
+@onready var gun = $EnemyGun
+@onready var shoot_timer = $ShootTimer
 
 var dead = false
 
-export var health = 1 setget set_health
-export var armor = 0
-export var speed = 200
-export var jump_force = 6
+@export var health = 1: set = set_health
+@export var armor = 0
+@export var speed = 200
+@export var jump_force = 6
 
 var meter_unit = 32
 var gravity:Vector2 = Vector2(0, 9.8*2)
-var velocity = Vector2.ZERO
 
 enum {IDLE_STATE, ATTENTION_STATE, ALERT_STATE, ATTACK_STATE}
 
@@ -54,7 +53,10 @@ func _physics_process(delta):
 		velocity.y = -jump_force * meter_unit
 		
 	
-	velocity = move_and_slide(velocity, Vector2.UP)
+	set_velocity(velocity)
+	set_up_direction(Vector2.UP)
+	move_and_slide()
+	velocity = velocity
 	
 
 

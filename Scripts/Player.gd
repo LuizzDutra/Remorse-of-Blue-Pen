@@ -1,26 +1,25 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 
-onready var gun = $Gun
-onready var interaction_area = $InteractionArea
-onready var slowdown = get_node("/root/Slowdown")
+@onready var gun = $Gun
+@onready var interaction_area = $InteractionArea
+@onready var slowdown = get_node("/root/Slowdown")
 
-export var health = 1 setget set_health
+@export var health = 1: set = set_health
 var dead = false
 signal died
 
 #movement variables
 var dir: Vector2 = Vector2.ZERO
-var velocity: Vector2 = Vector2.ZERO
-export var acceleration: float = 3600
-export var friction: float = 1800
-export var max_speed: float = 600
-export var max_vertical_speed: float = 800
-export var gravity: float = 9.8 * 4
-export var jump_force = 15
-export var dash_mult = 1.25
-export var dash_x_mult = 1.5
-export var dash_y_mult = 0.75
+@export var acceleration: float = 3600
+@export var friction: float = 1800
+@export var max_speed: float = 600
+@export var max_vertical_speed: float = 800
+@export var gravity: float = 9.8 * 4
+@export var jump_force = 15
+@export var dash_mult = 1.25
+@export var dash_x_mult = 1.5
+@export var dash_y_mult = 0.75
 var meter_unit = 32
 
 var l_input = 0
@@ -63,7 +62,7 @@ func _physics_process(delta):
 		$Arm.scale.x = facing
 		$Arm.rotation = (get_global_mouse_position() - global_position).angle()
 		$Arm.position.x = abs($Arm.position.x) * -facing
-		$Arm.rotation -= deg2rad(90)
+		$Arm.rotation -= deg_to_rad(90)
 	
 	
 	velocity.y += gravity * meter_unit * delta
@@ -99,7 +98,12 @@ func _physics_process(delta):
 	if parry_able and not dead:
 		parry()
 
-	velocity = move_and_slide(velocity, Vector2.UP)
+
+	set_velocity(velocity)
+	set_up_direction(Vector2.UP)
+	move_and_slide()
+	velocity = velocity
+
 	
 	if not dead:
 		if velocity.x == 0:
@@ -111,6 +115,7 @@ func _physics_process(delta):
 			$Body.playing = false
 			if dir.x != 0:
 				$Body.scale.x = dir.x
+
 
 	
 

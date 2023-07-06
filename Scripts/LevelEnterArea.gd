@@ -3,8 +3,8 @@ class_name level_enter_area
 
 signal level_entered(level_path)
 
-export var this_path = "res://Scenes/Levels/Level1.tscn"
-export var level_name = "Level 1" setget set_label_name
+@export var this_path = "res://Scenes/Levels/Level1.tscn"
+@export var level_name = "Level 1": set = set_label_name
 
 var ident = 0
 
