@@ -6,7 +6,7 @@
 [ext_resource path="res://Scripts/Hub.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 639, 27 )
+size = Vector2( 639, 27 )
 
 [node name="Hub" type="Node"]
 script = ExtResource( 4 )

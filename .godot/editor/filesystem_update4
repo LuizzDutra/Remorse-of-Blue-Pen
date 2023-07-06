@@ -1,0 +1,13 @@
+res://default_env.tres
+res://Base.tscn
+res://Scenes/Game.tscn
+res://Scripts/Player.gd
+res://Scripts/Enemy.gd
+res://Scripts/Projectile.gd
+res://Scenes/Player.tscn
+res://Scenes/Levels/Level1.tscn
+res://Assets/Sprites/TileSets/tilesetgrama.tres
+res://Scenes/Enemy.tscn
+res://Scenes/Levels/LevelBase.tscn
+res://Scenes/Options.tscn
+res://Scripts/Options.gd

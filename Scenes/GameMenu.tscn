@@ -12,19 +12,19 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -240.0
-margin_top = -225.0
-margin_right = 240.0
-margin_bottom = 225.0
+offset_left = -240.0
+offset_top = -225.0
+offset_right = 240.0
+offset_bottom = 225.0
 
 [node name="Button" type="Button" parent="Panel"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_right = -40.0
-margin_bottom = 20.0
+offset_right = -40.0
+offset_bottom = 20.0
 grow_horizontal = 0
 grow_vertical = 2
-rect_scale = Vector2( 3, 3 )
+scale = Vector2( 3, 3 )
 text = "X"
 
 [node name="GridContainer" type="GridContainer" parent="."]
@@ -32,46 +32,46 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -141.0
-margin_top = -106.0
-margin_right = -42.0
-margin_bottom = -38.0
+offset_left = -141.0
+offset_top = -106.0
+offset_right = -42.0
+offset_bottom = -38.0
 grow_horizontal = 2
 grow_vertical = 2
-rect_scale = Vector2( 3, 3 )
+scale = Vector2( 3, 3 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Restart" type="Button" parent="GridContainer"]
-margin_right = 99.0
-margin_bottom = 20.0
-focus_neighbour_top = NodePath("../BackToMenu")
-focus_neighbour_bottom = NodePath("../OptionsButton")
+offset_right = 99.0
+offset_bottom = 20.0
+focus_neighbor_top = NodePath("../BackToMenu")
+focus_neighbor_bottom = NodePath("../OptionsButton")
 text = "Restart"
 
 [node name="OptionsButton" type="Button" parent="GridContainer"]
-margin_top = 24.0
-margin_right = 99.0
-margin_bottom = 44.0
-focus_neighbour_top = NodePath("../Restart")
-focus_neighbour_bottom = NodePath("../BackToHub")
+offset_top = 24.0
+offset_right = 99.0
+offset_bottom = 44.0
+focus_neighbor_top = NodePath("../Restart")
+focus_neighbor_bottom = NodePath("../BackToHub")
 text = "Options"
 
 [node name="BackToHub" type="Button" parent="GridContainer"]
-margin_top = 48.0
-margin_right = 99.0
-margin_bottom = 68.0
-focus_neighbour_top = NodePath("../OptionsButton")
-focus_neighbour_bottom = NodePath("../BackToMenu")
+offset_top = 48.0
+offset_right = 99.0
+offset_bottom = 68.0
+focus_neighbor_top = NodePath("../OptionsButton")
+focus_neighbor_bottom = NodePath("../BackToMenu")
 text = "Back to Hub"
 
 [node name="BackToMenu" type="Button" parent="GridContainer"]
-margin_top = 72.0
-margin_right = 99.0
-margin_bottom = 92.0
-focus_neighbour_top = NodePath("../BackToHub")
-focus_neighbour_bottom = NodePath("../Restart")
+offset_top = 72.0
+offset_right = 99.0
+offset_bottom = 92.0
+focus_neighbor_top = NodePath("../BackToHub")
+focus_neighbor_bottom = NodePath("../Restart")
 text = "Back to Menu"
 
 [connection signal="pressed" from="Panel/Button" to="." method="_on_Button_pressed"]

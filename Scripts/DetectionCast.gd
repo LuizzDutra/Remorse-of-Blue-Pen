@@ -1,27 +1,27 @@
 extends RayCast2D
 class_name DetectionCast
 
-var target setget change_target
-var target_top: Position2D
-var target_bottom: Position2D
+var target : set = change_target
+var target_top: Marker2D
+var target_bottom: Marker2D
 var target_pos = Vector2.ZERO
 
 var target_dir_abs = 0
-export var facing = 2
-export var max_range = 500
+@export var facing = 2
+@export var max_range = 500
 var target_last_seen_pos = null
 var target_seen_point = Vector2.ZERO
 
 var sweep_angle = 0
 var func_time = 0
-export var func_speed = 2
+@export var func_speed = 2
 var cast_rotation = 0
 
 var detecting_target = false
 var rot = true
 
-export var collide_bodies = true setget change_collide_bodies
-export var collide_areas = true setget change_collide_areas
+@export var collide_bodies = true: set = change_collide_bodies
+@export var collide_areas = true: set = change_collide_areas
 
 func _ready():
 	collide_with_areas = collide_areas
@@ -41,22 +41,22 @@ func calculate_cast_scan(delta: float):
 			if not rot:
 				cast_rotation = 0
 			enabled = true
-			cast_to = (target_dir.normalized()*max_range).rotated(cast_rotation)
+			target_position = (target_dir.normalized()*max_range).rotated(cast_rotation)
 			force_raycast_update()
 			
 		_:
 			enabled = false
-	if is_colliding() and get_collider().name == "DetectArea" and target.is_a_parent_of(get_collider()):
+	if is_colliding() and get_collider().name == "DetectArea" and target.is_ancestor_of(get_collider()):
 		detecting_target = true
 		rot = false
-		var cast_buffer = [cast_to, get_collision_point()]
-		cast_to = ((get_collider().global_position - global_position).normalized()*max_range)
+		var cast_buffer = [target_position, get_collision_point()]
+		target_position = ((get_collider().global_position - global_position).normalized()*max_range)
 		force_raycast_update()
 		if is_colliding() and get_collider().name == "DetectArea":
 			target_last_seen_pos = get_collider().global_position
 			target_seen_point = get_collision_point() - target_last_seen_pos
 		else:
-			cast_to = cast_buffer[0]
+			target_position = cast_buffer[0]
 			force_raycast_update()
 			target_seen_point = cast_buffer[1]
 			target_last_seen_pos = target_seen_point

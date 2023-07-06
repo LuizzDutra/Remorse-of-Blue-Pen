@@ -4,7 +4,7 @@ extends Control
 signal start_game
 signal options_pressed
 
-onready var button_sound = get_node("/root/ButtonSound")
+@onready var button_sound = get_node("/root/ButtonSound")
 
 func _ready():
 	$GridContainer/StartButton.grab_focus()
