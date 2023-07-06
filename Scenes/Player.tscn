@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Sprites/Player/correndo_blen_pun.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/Player/spriteframes/Player.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://Scripts/Receiver.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/HurtBox.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Sprites/Player/cabeca_do_pen_blue.png" type="Texture" id=5]
@@ -83,15 +83,18 @@ position = Vector2( -15, 32 )
 wait_time = 0.2
 one_shot = true
 
-[node name="Body" type="Sprite" parent="."]
-texture = ExtResource( 2 )
-hframes = 11
+[node name="Body" type="AnimatedSprite" parent="."]
+frames = ExtResource( 2 )
+animation = "idle"
+frame = 1
+playing = true
 
 [node name="Head" type="Sprite" parent="."]
 visible = false
 texture = ExtResource( 5 )
 
 [node name="Arm" type="Sprite" parent="."]
+visible = false
 position = Vector2( -6, -7 )
 texture = ExtResource( 6 )
 offset = Vector2( 6, 7 )
