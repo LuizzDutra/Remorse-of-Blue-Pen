@@ -59,7 +59,6 @@ func _physics_process(delta):
 
 	#Sprites code
 	if not dead:
-		$Body.scale.x = facing
 		$Arm.scale.x = facing
 		$Arm.rotation = (get_global_mouse_position() - global_position).angle()
 		$Arm.position.x = abs($Arm.position.x) * -facing
@@ -99,10 +98,24 @@ func _physics_process(delta):
 	if parry_able and not dead:
 		parry()
 
+
 	set_velocity(velocity)
 	set_up_direction(Vector2.UP)
 	move_and_slide()
 	velocity = velocity
+
+	
+	if not dead:
+		if velocity.x == 0:
+			$Body.playing = true
+			$Body.animation = "idle"
+			if dir.x == 0:
+				$Body.scale.x = facing
+		if velocity.x != 0:
+			$Body.playing = false
+			if dir.x != 0:
+				$Body.scale.x = dir.x
+
 
 	
 

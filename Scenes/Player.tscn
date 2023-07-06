@@ -1,5 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://42ev86leuhyu"]
 
+
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://c6vmkmbpo3sp7" path="res://Assets/Sprites/Player/correndo_blen_pun.png" id="2"]
 [ext_resource type="Script" path="res://Scripts/Receiver.gd" id="3"]
@@ -8,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bwgfm04r8yvl4" path="res://Assets/Sprites/Player/blue_pen_paradinho_meus_amigus.png" id="6"]
 [ext_resource type="AudioStream" uid="uid://cd6vlscmih1cr" path="res://Assets/Sounds/bluepen_hit.mp3" id="7"]
 [ext_resource type="AudioStream" uid="uid://c6siqjw42kyxv" path="res://Assets/Sounds/player_hit_impact.wav" id="8"]
+
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(22, 64)
@@ -83,20 +85,22 @@ position = Vector2(-15, 32)
 wait_time = 0.2
 one_shot = true
 
+
 [node name="Body" type="Sprite2D" parent="."]
 texture = ExtResource("2")
 hframes = 11
+
 
 [node name="Head" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource("5")
 
+
 [node name="Arm" type="Sprite2D" parent="."]
 position = Vector2(-6, -7)
 texture = ExtResource("6")
 offset = Vector2(6, 7)
-hframes = 3
-frame = 2
+
 
 [node name="hit_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7")

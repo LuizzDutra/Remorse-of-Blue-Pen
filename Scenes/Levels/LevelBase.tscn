@@ -1,3 +1,4 @@
+
 [gd_scene load_steps=8 format=3 uid="uid://dnmwa7ecx68bc"]
 
 [ext_resource type="PackedScene" uid="uid://42ev86leuhyu" path="res://Scenes/Player.tscn" id="1"]
@@ -8,19 +9,23 @@
 [ext_resource type="Texture2D" uid="uid://dyyhxu52j5hj2" path="res://Assets/Sprites/parallax/Blue_Pen_arvore2.png" id="6"]
 [ext_resource type="Script" path="res://Scripts/LevelBase.gd" id="7"]
 
+
 [node name="Level" type="Node2D"]
 script = ExtResource("7")
 
-[node name="Player" parent="." instance=ExtResource("1")]
+
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2")
 format = 2
 layer_0/tile_data = PackedInt32Array(262139, 1, 0, 262140, 1, 0, 262141, 1, 0, 262142, 1, 0, 262143, 1, 0, 196608, 1, 0, 196609, 1, 0, 196610, 1, 0, 196611, 1, 0, 196612, 1, 0)
 
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scale = Vector2(0.6, 0.6)
 transform = Transform2D(0.6, 0, 0, 0.6, 0, 0)
+
+
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.1, 0.1)
@@ -39,9 +44,11 @@ motion_mirroring = Vector2(1920, 0)
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("4")
+
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 1280, 128)
+
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.25, 0.15)
@@ -50,9 +57,11 @@ motion_mirroring = Vector2(1920, 0)
 [node name="Sprite2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("6")
+
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 1280, 128)
+
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.3, 0.15)
@@ -61,6 +70,7 @@ motion_mirroring = Vector2(1920, 0)
 [node name="Sprite3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("5")
+
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 1280, 128)
