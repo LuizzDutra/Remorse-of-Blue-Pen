@@ -26,8 +26,6 @@ grow_vertical = 2
 
 [node name="Options" parent="CanvasLayer" instance=ExtResource("4")]
 visible = false
-grow_horizontal = 2
-grow_vertical = 2
 
 [connection signal="level_entered" from="Hub" to="." method="_on_Hub_level_entered"]
 [connection signal="reset" from="Hub" to="." method="_on_reset"]
