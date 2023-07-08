@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://42ev86leuhyu"]
+[gd_scene load_steps=25 format=3 uid="uid://42ev86leuhyu"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1"]
 [ext_resource type="Animation" uid="uid://c2ffoal6upjsh" path="res://Animations/idle.res" id="2_kwsr5"]
@@ -20,41 +20,45 @@ _data = {
 "walk": ExtResource("5_ow7gr")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5pr0p"]
-animation = &"walk"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_aaqae"]
-animation = &"parry"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3pyon"]
-animation = &"idle"
-
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_i4fry"]
 filter_enabled = true
 filters = ["Skeleton2D/hip/leftLeg/leftCalf:rotation", "Skeleton2D/hip/leftLeg:rotation", "Skeleton2D/hip/rightLeg/rightCalf:rotation", "Skeleton2D/hip/rightLeg:rotation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3pyon"]
+animation = &"idle"
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_2bd25"]
 filter_enabled = true
 filters = ["Skeleton2D/hip/chest/leftArm/leftFore:rotation", "Skeleton2D/hip/chest/leftArm:rotation"]
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_aaqae"]
+animation = &"parry"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_w0hgl"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5pr0p"]
+animation = &"walk"
+
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_hdybs"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_yp7cs"]
-graph_offset = Vector2(-339.343, 45.8699)
-nodes/Animation/node = SubResource("AnimationNodeAnimation_3pyon")
-nodes/Animation/position = Vector2(60, 120)
-"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_5pr0p")
-"nodes/Animation 2/position" = Vector2(60, 400)
-"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_aaqae")
-"nodes/Animation 3/position" = Vector2(40, 260)
-nodes/Blend2/node = SubResource("AnimationNodeBlend2_i4fry")
-nodes/Blend2/position = Vector2(440, 240)
-nodes/OneShot/node = SubResource("AnimationNodeOneShot_2bd25")
-nodes/OneShot/position = Vector2(280, 100)
-nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_hdybs")
-nodes/TimeScale/position = Vector2(300, 340)
+graph_offset = Vector2(-403.299, 87.197)
+nodes/finalBlend/node = SubResource("AnimationNodeBlend2_i4fry")
+nodes/finalBlend/position = Vector2(440, 240)
+nodes/idle/node = SubResource("AnimationNodeAnimation_3pyon")
+nodes/idle/position = Vector2(60, 120)
 nodes/output/position = Vector2(740, 280)
-node_connections = [&"output", 0, &"Blend2", &"Blend2", 0, &"OneShot", &"Blend2", 1, &"TimeScale", &"OneShot", 0, &"Animation", &"OneShot", 1, &"Animation 3", &"TimeScale", 0, &"Animation 2"]
+nodes/parry/node = SubResource("AnimationNodeOneShot_2bd25")
+nodes/parry/position = Vector2(280, 100)
+nodes/parryAnim/node = SubResource("AnimationNodeAnimation_aaqae")
+nodes/parryAnim/position = Vector2(-60, 240)
+nodes/parryTimescale/node = SubResource("AnimationNodeTimeScale_w0hgl")
+nodes/parryTimescale/position = Vector2(100, 260)
+nodes/walkAnim/node = SubResource("AnimationNodeAnimation_5pr0p")
+nodes/walkAnim/position = Vector2(60, 400)
+nodes/walkTimescale/node = SubResource("AnimationNodeTimeScale_hdybs")
+nodes/walkTimescale/position = Vector2(260, 340)
+node_connections = [&"output", 0, &"finalBlend", &"parry", 0, &"idle", &"parry", 1, &"parryTimescale", &"parryTimescale", 0, &"parryAnim", &"walkTimescale", 0, &"walkAnim", &"finalBlend", 0, &"parry", &"finalBlend", 1, &"walkTimescale"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(22, 60)
@@ -82,11 +86,12 @@ libraries = {
 tree_root = SubResource("AnimationNodeBlendTree_yp7cs")
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/Blend2/blend_amount = 1.0
-parameters/OneShot/active = false
-parameters/OneShot/internal_active = false
-parameters/OneShot/request = 0
-parameters/TimeScale/scale = 3.0
+parameters/finalBlend/blend_amount = 1.0
+parameters/parry/active = false
+parameters/parry/internal_active = false
+parameters/parry/request = 0
+parameters/parryTimescale/scale = 1.0
+parameters/walkTimescale/scale = 3.0
 script = ExtResource("6_0h2cl")
 
 [node name="limbSprites" type="Node2D" parent="."]
@@ -213,12 +218,12 @@ rest = Transform2D(1, 0, 0, 1, 0.25, -16.5)
 
 [node name="rightLeg" type="Bone2D" parent="Skeleton2D/hip"]
 position = Vector2(-4.75, 1.75)
-scale = Vector2(1, 1)
+scale = Vector2(0.999999, 0.999999)
 rest = Transform2D(1, 0, 0, 1, -4.75, 2.75)
 
 [node name="rightCalf" type="Bone2D" parent="Skeleton2D/hip/rightLeg"]
 position = Vector2(0, 10.25)
-scale = Vector2(1, 1)
+scale = Vector2(0.999999, 0.999999)
 rest = Transform2D(1, 0, 0, 1, 0, 10.25)
 auto_calculate_length_and_angle = false
 length = 14.0
@@ -226,11 +231,12 @@ bone_angle = 90.0
 
 [node name="leftLeg" type="Bone2D" parent="Skeleton2D/hip"]
 position = Vector2(4, 1.75)
-scale = Vector2(0.999999, 0.999999)
+scale = Vector2(0.999998, 0.999998)
 rest = Transform2D(1, 0, 0, 1, 4, 2.75)
 
 [node name="leftCalf" type="Bone2D" parent="Skeleton2D/hip/leftLeg"]
 position = Vector2(1, 10)
+scale = Vector2(0.999999, 0.999999)
 rest = Transform2D(1, 0, 0, 1, 1, 10)
 auto_calculate_length_and_angle = false
 length = 15.0

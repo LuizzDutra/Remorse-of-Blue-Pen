@@ -5,6 +5,8 @@ extends CharacterBody2D
 @onready var interaction_area = $InteractionArea
 @onready var slowdown = get_node("/root/Slowdown")
 
+@onready var AnimTree = $AnimationTree
+
 @export var health = 1: set = set_health
 var dead = false
 signal died
@@ -97,6 +99,13 @@ func _physics_process(delta):
 	set_up_direction(Vector2.UP)
 	move_and_slide()
 	velocity = velocity
+	
+	if is_on_floor():
+		var blenAmount = abs(velocity.x/max_speed)
+		clamp(blenAmount, 0, 1)
+		AnimTree.set("parameters/finalBlend/blend_amount", blenAmount)
+	else:
+		AnimTree.set("parameters/finalBlend/blend_amount", 0)
 
 
 
@@ -147,6 +156,7 @@ func _unhandled_input(event):
 
 func parry():
 	var parry_success = false
+	AnimTree.set("parameters/parry/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	for area in $ParryArea.get_overlapping_areas():
 		if area.get_parent() != null and area.get_parent().has_method("parry"):
 			area.get_parent().parry("player")
