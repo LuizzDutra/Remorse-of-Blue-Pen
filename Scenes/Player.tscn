@@ -32,16 +32,16 @@ filters = ["Skeleton2D/hip/leftLeg/leftCalf:rotation", "Skeleton2D/hip/leftLeg:r
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_hdybs"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_yp7cs"]
-graph_offset = Vector2(-328.122, 144.198)
+graph_offset = Vector2(-295.296, 111.912)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_3pyon")
 nodes/Animation/position = Vector2(60, 160)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_5pr0p")
-"nodes/Animation 2/position" = Vector2(-60, 340)
+"nodes/Animation 2/position" = Vector2(60, 360)
 nodes/Blend2/node = SubResource("AnimationNodeBlend2_i4fry")
-nodes/Blend2/position = Vector2(320.721, 251.263)
+nodes/Blend2/position = Vector2(520, 280)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_hdybs")
-nodes/TimeScale/position = Vector2(120, 340)
-nodes/output/position = Vector2(680, 180)
+nodes/TimeScale/position = Vector2(300, 340)
+nodes/output/position = Vector2(740, 280)
 node_connections = [&"output", 0, &"Blend2", &"Blend2", 0, &"Animation", &"Blend2", 1, &"TimeScale", &"TimeScale", 0, &"Animation 2"]
 
 [sub_resource type="RectangleShape2D" id="1"]
@@ -69,8 +69,9 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_yp7cs")
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/Blend2/blend_amount = 1.0
-parameters/TimeScale/scale = 2.0
+parameters/TimeScale/scale = 3.0
 
 [node name="limbSprites" type="Node2D" parent="."]
 position = Vector2(0, -15.192)
@@ -165,11 +166,12 @@ position = Vector2(0, 13.658)
 rest = Transform2D(1, 0, 0, 1, 0, 13.25)
 
 [node name="chest" type="Bone2D" parent="Skeleton2D/hip"]
-position = Vector2(0, -3)
+position = Vector2(0, -3.20871)
 rest = Transform2D(1, 0, 0, 1, 0, -3)
 
 [node name="rightArm" type="Bone2D" parent="Skeleton2D/hip/chest"]
 position = Vector2(-6, -11.058)
+rotation = -1.5708
 rest = Transform2D(1, 0, 0, 1, -6, -11.058)
 
 [node name="rightFore" type="Bone2D" parent="Skeleton2D/hip/chest/rightArm"]
@@ -181,6 +183,7 @@ bone_angle = 180.0
 
 [node name="leftArm" type="Bone2D" parent="Skeleton2D/hip/chest"]
 position = Vector2(5, -11.058)
+rotation = 1.5708
 rest = Transform2D(1, 0, 0, 1, 5, -11.058)
 
 [node name="leftFore" type="Bone2D" parent="Skeleton2D/hip/chest/leftArm"]
@@ -196,10 +199,12 @@ rest = Transform2D(1, 0, 0, 1, 0.25, -16.5)
 
 [node name="rightLeg" type="Bone2D" parent="Skeleton2D/hip"]
 position = Vector2(-4.75, 1.75)
+rotation = 0.0322337
 rest = Transform2D(1, 0, 0, 1, -4.75, 2.75)
 
 [node name="rightCalf" type="Bone2D" parent="Skeleton2D/hip/rightLeg"]
 position = Vector2(0, 10.25)
+rotation = 0.0250707
 rest = Transform2D(1, 0, 0, 1, 0, 10.25)
 auto_calculate_length_and_angle = false
 length = 14.0
@@ -207,11 +212,13 @@ bone_angle = 90.0
 
 [node name="leftLeg" type="Bone2D" parent="Skeleton2D/hip"]
 position = Vector2(4, 1.75)
+rotation = 0.0832307
 scale = Vector2(0.999999, 0.999999)
 rest = Transform2D(1, 0, 0, 1, 4, 2.75)
 
 [node name="leftCalf" type="Bone2D" parent="Skeleton2D/hip/leftLeg"]
 position = Vector2(1, 10)
+rotation = 0.236642
 scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 1, 10)
 auto_calculate_length_and_angle = false
