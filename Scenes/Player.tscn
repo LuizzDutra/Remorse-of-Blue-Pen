@@ -1,71 +1,48 @@
-[gd_scene load_steps=14 format=3 uid="uid://42ev86leuhyu"]
+[gd_scene load_steps=21 format=3 uid="uid://42ev86leuhyu"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1"]
+[ext_resource type="Animation" uid="uid://c2ffoal6upjsh" path="res://Animations/idle.res" id="2_kwsr5"]
 [ext_resource type="Texture2D" uid="uid://do8t24g1y78dn" path="res://Assets/Sprites/Player/blue_T_pose.png" id="2_vulel"]
 [ext_resource type="Script" path="res://Scripts/Receiver.gd" id="3"]
+[ext_resource type="Animation" uid="uid://dr6xvuy14g72w" path="res://Animations/RESET.res" id="3_frj71"]
 [ext_resource type="Script" path="res://Scripts/HurtBox.gd" id="4"]
+[ext_resource type="Animation" uid="uid://dybx6mnigeq55" path="res://Animations/parry.res" id="4_lpnnx"]
+[ext_resource type="Animation" uid="uid://rihovaalmc5e" path="res://Animations/walk.res" id="5_ow7gr"]
 [ext_resource type="AudioStream" uid="uid://cd6vlscmih1cr" path="res://Assets/Sounds/bluepen_hit.mp3" id="7"]
 [ext_resource type="AudioStream" uid="uid://c6siqjw42kyxv" path="res://Assets/Sounds/player_hit_impact.wav" id="8"]
 
-[sub_resource type="Animation" id="Animation_fnta6"]
-resource_name = "idle"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Skeleton2D/hip/chest/rightArm:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.01),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-1.5708]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Skeleton2D/hip/chest/leftArm:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.01),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.5708]
-}
-
-[sub_resource type="Animation" id="Animation_cldxl"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Skeleton2D/hip/chest/rightArm:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Skeleton2D/hip/chest/leftArm:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_51bhn"]
 _data = {
-"RESET": SubResource("Animation_cldxl"),
-"idle": SubResource("Animation_fnta6")
+"RESET": ExtResource("3_frj71"),
+"idle": ExtResource("2_kwsr5"),
+"parry": ExtResource("4_lpnnx"),
+"walk": ExtResource("5_ow7gr")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5pr0p"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3pyon"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_i4fry"]
+filter_enabled = true
+filters = ["Skeleton2D/hip/leftLeg/leftCalf:rotation", "Skeleton2D/hip/leftLeg:rotation", "Skeleton2D/hip/rightLeg/rightCalf:rotation", "Skeleton2D/hip/rightLeg:rotation"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_hdybs"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_yp7cs"]
+graph_offset = Vector2(-328.122, 144.198)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_3pyon")
+nodes/Animation/position = Vector2(60, 160)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_5pr0p")
+"nodes/Animation 2/position" = Vector2(-60, 340)
+nodes/Blend2/node = SubResource("AnimationNodeBlend2_i4fry")
+nodes/Blend2/position = Vector2(320.721, 251.263)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_hdybs")
+nodes/TimeScale/position = Vector2(120, 340)
+nodes/output/position = Vector2(680, 180)
+node_connections = [&"output", 0, &"Blend2", &"Blend2", 0, &"Animation", &"Blend2", 1, &"TimeScale", &"TimeScale", 0, &"Animation 2"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(22, 60)
@@ -88,6 +65,12 @@ script = ExtResource("1")
 libraries = {
 "": SubResource("AnimationLibrary_51bhn")
 }
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_yp7cs")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Blend2/blend_amount = 1.0
+parameters/TimeScale/scale = 2.0
 
 [node name="limbSprites" type="Node2D" parent="."]
 position = Vector2(0, -15.192)
@@ -177,7 +160,8 @@ internal_vertex_count = 10
 position = Vector2(0, -15.192)
 
 [node name="hip" type="Bone2D" parent="Skeleton2D"]
-position = Vector2(0, 13.25)
+visible = false
+position = Vector2(0, 13.658)
 rest = Transform2D(1, 0, 0, 1, 0, 13.25)
 
 [node name="chest" type="Bone2D" parent="Skeleton2D/hip"]
@@ -211,7 +195,7 @@ position = Vector2(0.25, -16.5)
 rest = Transform2D(1, 0, 0, 1, 0.25, -16.5)
 
 [node name="rightLeg" type="Bone2D" parent="Skeleton2D/hip"]
-position = Vector2(-4.75, 2.75)
+position = Vector2(-4.75, 1.75)
 rest = Transform2D(1, 0, 0, 1, -4.75, 2.75)
 
 [node name="rightCalf" type="Bone2D" parent="Skeleton2D/hip/rightLeg"]
@@ -222,11 +206,13 @@ length = 14.0
 bone_angle = 90.0
 
 [node name="leftLeg" type="Bone2D" parent="Skeleton2D/hip"]
-position = Vector2(4, 2.75)
+position = Vector2(4, 1.75)
+scale = Vector2(0.999999, 0.999999)
 rest = Transform2D(1, 0, 0, 1, 4, 2.75)
 
 [node name="leftCalf" type="Bone2D" parent="Skeleton2D/hip/leftLeg"]
 position = Vector2(1, 10)
+scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 1, 10)
 auto_calculate_length_and_angle = false
 length = 15.0

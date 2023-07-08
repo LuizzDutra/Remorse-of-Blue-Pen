@@ -7,3 +7,7 @@ res://Scenes/Enemy.tscn
 res://Scenes/Levels/Level1.tscn
 res://Scenes/Levels/LevelBase.tscn
 res://Scenes/Options.tscn
+res://Animations/RESET.res
+res://Animations/idle.res
+res://Animations/parry.res
+res://Animations/walk.res
