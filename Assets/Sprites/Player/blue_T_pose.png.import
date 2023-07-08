@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pvvt0kx4nljv"
-path="res://.godot/imported/Blue_Pen_Nuvem1.png-cb3dc9abc766fe7cb975b07882c7b17c.ctex"
+uid="uid://do8t24g1y78dn"
+path="res://.godot/imported/blue_T_pose.png-12e8392c8e87aca6e85391005aae822b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/parallax/Blue_Pen_Nuvem1.png"
-dest_files=["res://.godot/imported/Blue_Pen_Nuvem1.png-cb3dc9abc766fe7cb975b07882c7b17c.ctex"]
+source_file="res://Assets/Sprites/Player/blue_T_pose.png"
+dest_files=["res://.godot/imported/blue_T_pose.png-12e8392c8e87aca6e85391005aae822b.ctex"]
 
 [params]
 

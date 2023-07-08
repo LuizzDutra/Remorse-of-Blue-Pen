@@ -1,2 +1,12 @@
-HSlider
+Polygon2D
+AnimationPlayer
+AnimationTree
+Bone2D
+Skeleton2D
+MeshInstance2D
+Node2D
+CollisionPolygon2D
+PhysicalBone2D
+RigidBody2D
 Sprite2D
+HSlider
