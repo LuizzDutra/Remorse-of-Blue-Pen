@@ -174,7 +174,6 @@ bones = ["hip", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 internal_vertex_count = 10
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]
-visible = false
 position = Vector2(0, -15.192)
 
 [node name="hip" type="Bone2D" parent="Skeleton2D"]
@@ -186,8 +185,8 @@ position = Vector2(0, -3)
 rest = Transform2D(1, 0, 0, 1, 0, -3)
 
 [node name="rightArm" type="Bone2D" parent="Skeleton2D/hip/chest"]
-position = Vector2(-7, -10.058)
-rest = Transform2D(1, 0, 0, 1, -7, -10.058)
+position = Vector2(-6, -11.058)
+rest = Transform2D(1, 0, 0, 1, -6, -11.058)
 
 [node name="rightFore" type="Bone2D" parent="Skeleton2D/hip/chest/rightArm"]
 position = Vector2(-5.75, -0.999999)
@@ -197,8 +196,8 @@ length = 11.0
 bone_angle = 180.0
 
 [node name="leftArm" type="Bone2D" parent="Skeleton2D/hip/chest"]
-position = Vector2(6, -10.058)
-rest = Transform2D(1, 0, 0, 1, 6, -10.058)
+position = Vector2(5, -11.058)
+rest = Transform2D(1, 0, 0, 1, 5, -11.058)
 
 [node name="leftFore" type="Bone2D" parent="Skeleton2D/hip/chest/leftArm"]
 position = Vector2(6, -1)
