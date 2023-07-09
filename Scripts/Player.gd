@@ -92,15 +92,20 @@ func _physics_process(delta):
 	set_up_direction(Vector2.UP)
 	move_and_slide()
 	velocity = velocity
+
 	
 	if is_on_floor():
 		var blenAmount = abs(velocity.x/max_speed)
-		clamp(blenAmount, 0, 1)
+		blenAmount = clamp(blenAmount, 0, 1)
 		AnimTree.set("parameters/finalBlend/blend_amount", blenAmount)
+		var skelDir = dir.x
+		
 	else:
 		AnimTree.set("parameters/finalBlend/blend_amount", 0)
 		AnimTree.set("parameters/walkAnimTimeSeek/seek_request", 0)
 	
+	if dir.x != 0:
+			skeleton.scale.x = dir.x
 	
 
 
