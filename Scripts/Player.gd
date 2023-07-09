@@ -71,6 +71,7 @@ func _physics_process(delta):
 
 	
 	if jump_input == 1 and jump_able and not dead:
+		AnimTree.set("parameters/jumpOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		velocity.y = -jump_force * meter_unit
 		jump_able = false
 
@@ -95,14 +96,16 @@ func _physics_process(delta):
 
 	
 	if is_on_floor():
+		AnimTree.set("parameters/airborneBlend/blend_amount", 0)
 		var blenAmount = abs(velocity.x/max_speed)
 		blenAmount = clamp(blenAmount, 0, 1)
-		AnimTree.set("parameters/finalBlend/blend_amount", blenAmount)
+		AnimTree.set("parameters/walkBlend/blend_amount", blenAmount)
 		var skelDir = dir.x
 		
 	else:
-		AnimTree.set("parameters/finalBlend/blend_amount", 0)
-		AnimTree.set("parameters/walkAnimTimeSeek/seek_request", 0)
+		AnimTree.set("parameters/airborneBlend/blend_amount", clamp(abs(velocity.y/max_vertical_speed), 0.25, 0.5)*2)
+		AnimTree.set("parameters/airborneBlendSpace/blend_position", velocity.y/max_vertical_speed)
+		
 	
 	if dir.x != 0:
 			skeleton.scale.x = dir.x
