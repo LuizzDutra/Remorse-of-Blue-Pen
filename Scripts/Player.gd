@@ -147,7 +147,8 @@ func _unhandled_input(event):
 	if event.is_action("parry"):
 		if event.is_pressed() and $ParryTimer.is_stopped() and $ParryDurationTimer.is_stopped():
 			parry_able = true
-			AnimTree.set("parameters/parry/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+			if $ParryTimer.is_stopped():
+				AnimTree.set("parameters/parry/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 			$ParryDurationTimer.start()
 		
 
