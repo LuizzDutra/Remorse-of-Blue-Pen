@@ -7,6 +7,8 @@ extends CharacterBody2D
 
 @onready var AnimTree = $AnimationTree
 
+@onready var skeleton = $Skeleton2D
+
 @export var health = 1: set = set_health
 var dead = false
 signal died
@@ -51,15 +53,6 @@ func _physics_process(delta):
 
 	dir.x = r_input - l_input
 
-	facing = global_position.direction_to(get_global_mouse_position()).normalized().x
-	if facing > 0:
-		facing = ceil(facing)
-	elif facing < 0:
-		facing = floor(facing)
-	elif facing == 0:
-		facing = 1
-
-	
 	
 	velocity.y += gravity * meter_unit * delta
 	if not dead:
@@ -106,10 +99,8 @@ func _physics_process(delta):
 		AnimTree.set("parameters/finalBlend/blend_amount", blenAmount)
 	else:
 		AnimTree.set("parameters/finalBlend/blend_amount", 0)
-
-
-
-
+		AnimTree.set("parameters/walkAnimTimeSeek/seek_request", 0)
+	
 	
 
 
@@ -151,12 +142,12 @@ func _unhandled_input(event):
 	if event.is_action("parry"):
 		if event.is_pressed() and $ParryTimer.is_stopped() and $ParryDurationTimer.is_stopped():
 			parry_able = true
+			AnimTree.set("parameters/parry/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 			$ParryDurationTimer.start()
 		
 
 func parry():
 	var parry_success = false
-	AnimTree.set("parameters/parry/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	for area in $ParryArea.get_overlapping_areas():
 		if area.get_parent() != null and area.get_parent().has_method("parry"):
 			area.get_parent().parry("player")

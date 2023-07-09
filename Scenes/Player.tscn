@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://42ev86leuhyu"]
+[gd_scene load_steps=27 format=3 uid="uid://42ev86leuhyu"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1"]
 [ext_resource type="Animation" uid="uid://c2ffoal6upjsh" path="res://Animations/idle.res" id="2_kwsr5"]
@@ -10,6 +10,7 @@
 [ext_resource type="Animation" uid="uid://rihovaalmc5e" path="res://Animations/walk.res" id="5_ow7gr"]
 [ext_resource type="Script" path="res://Scripts/haha.gd" id="6_0h2cl"]
 [ext_resource type="AudioStream" uid="uid://cd6vlscmih1cr" path="res://Assets/Sounds/bluepen_hit.mp3" id="7"]
+[ext_resource type="Texture2D" uid="uid://ei4qgvqmuafk" path="res://Assets/Sprites/Player/blue_T_pose_comp.png" id="7_6tp1k"]
 [ext_resource type="AudioStream" uid="uid://c6siqjw42kyxv" path="res://Assets/Sounds/player_hit_impact.wav" id="8"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_51bhn"]
@@ -39,10 +40,11 @@ animation = &"parry"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5pr0p"]
 animation = &"walk"
 
+[sub_resource type="AnimationNodeTimeSeek" id="AnimationNodeTimeSeek_2jak7"]
+
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_hdybs"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_yp7cs"]
-graph_offset = Vector2(-403.299, 87.197)
 nodes/finalBlend/node = SubResource("AnimationNodeBlend2_i4fry")
 nodes/finalBlend/position = Vector2(440, 240)
 nodes/idle/node = SubResource("AnimationNodeAnimation_3pyon")
@@ -55,10 +57,12 @@ nodes/parryAnim/position = Vector2(-60, 240)
 nodes/parryTimescale/node = SubResource("AnimationNodeTimeScale_w0hgl")
 nodes/parryTimescale/position = Vector2(100, 260)
 nodes/walkAnim/node = SubResource("AnimationNodeAnimation_5pr0p")
-nodes/walkAnim/position = Vector2(60, 400)
+nodes/walkAnim/position = Vector2(-40, 400)
+nodes/walkAnimTimeSeek/node = SubResource("AnimationNodeTimeSeek_2jak7")
+nodes/walkAnimTimeSeek/position = Vector2(120, 420)
 nodes/walkTimescale/node = SubResource("AnimationNodeTimeScale_hdybs")
 nodes/walkTimescale/position = Vector2(260, 340)
-node_connections = [&"output", 0, &"finalBlend", &"parry", 0, &"idle", &"parry", 1, &"parryTimescale", &"parryTimescale", 0, &"parryAnim", &"walkTimescale", 0, &"walkAnim", &"finalBlend", 0, &"parry", &"finalBlend", 1, &"walkTimescale"]
+node_connections = [&"output", 0, &"finalBlend", &"finalBlend", 0, &"parry", &"finalBlend", 1, &"walkTimescale", &"parry", 0, &"idle", &"parry", 1, &"parryTimescale", &"parryTimescale", 0, &"parryAnim", &"walkAnimTimeSeek", 0, &"walkAnim", &"walkTimescale", 0, &"walkAnimTimeSeek"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(22, 60)
@@ -78,6 +82,7 @@ collision_layer = 0
 script = ExtResource("1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+reset_on_save = false
 libraries = {
 "": SubResource("AnimationLibrary_51bhn")
 }
@@ -91,14 +96,16 @@ parameters/parry/active = false
 parameters/parry/internal_active = false
 parameters/parry/request = 0
 parameters/parryTimescale/scale = 1.0
+parameters/walkAnimTimeSeek/seek_request = -1.0
 parameters/walkTimescale/scale = 3.0
 script = ExtResource("6_0h2cl")
 
 [node name="limbSprites" type="Node2D" parent="."]
-position = Vector2(0, -15.192)
+visible = false
+position = Vector2(1.96, -14.777)
 
 [node name="leftArm" type="Polygon2D" parent="limbSprites"]
-position = Vector2(-33, -20.808)
+position = Vector2(-32, -20.808)
 texture = ExtResource("2_vulel")
 skeleton = NodePath("../../Skeleton2D")
 polygon = PackedVector2Array(36, 23, 36, 17, 38, 17, 40, 17, 49, 18, 51, 16, 57, 16, 57, 21, 54, 22, 51, 21, 49, 20, 45, 21, 42, 22, 40, 23, 42, 18, 44, 18, 46, 20, 44, 22, 35, 23, 35, 20, 36, 20)
@@ -169,12 +176,13 @@ bones = ["hip", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 internal_vertex_count = 10
 
 [node name="rightArm" type="Polygon2D" parent="limbSprites"]
-position = Vector2(-32, -20.808)
+position = Vector2(-33, 19.192)
+scale = Vector2(1, -1)
 texture = ExtResource("2_vulel")
 skeleton = NodePath("../../Skeleton2D")
-polygon = PackedVector2Array(27, 17, 27, 23, 24, 23, 22, 23, 18, 22, 16, 20, 13, 20, 11, 22, 7, 22, 5, 20, 5, 16, 8, 15, 12, 15, 14, 18, 21, 17, 23, 17, 18, 18, 17, 18, 19, 18, 17, 21, 19, 22, 28, 23, 28, 17, 29, 23, 29, 20, 28, 20)
-uv = PackedVector2Array(27, 17, 27, 23, 24, 23, 22, 23, 18, 22, 16, 20, 13, 20, 11, 22, 7, 22, 5, 20, 5, 16, 8, 15, 12, 15, 14, 18, 21, 17, 23, 17, 18, 18, 17, 18, 19, 18, 17, 21, 19, 22, 28, 23, 28, 17, 29, 22, 29, 20, 28, 20)
-polygons = [PackedInt32Array(10, 11, 12, 13, 17, 5, 6, 7, 8, 9), PackedInt32Array(19, 16, 17), PackedInt32Array(5, 19, 17), PackedInt32Array(19, 4, 16), PackedInt32Array(16, 18, 4), PackedInt32Array(20, 18, 4), PackedInt32Array(18, 14, 15, 0, 1, 2, 3, 20), PackedInt32Array(0, 22, 21, 1), PackedInt32Array(21, 23, 24, 25)]
+polygon = PackedVector2Array(27, 17, 27, 23, 24, 23, 22, 23, 18, 22, 16, 20, 13, 20, 11, 22, 7, 22, 5, 20, 5, 16, 8, 15, 12, 15, 14, 18, 21, 17, 23, 17, 18, 18, 17, 18, 19, 18, 17, 21, 19, 22, 28, 23, 28, 17, 29, 21, 29, 17, 28, 21)
+uv = PackedVector2Array(27, 17, 27, 23, 24, 23, 22, 23, 18, 22, 16, 20, 13, 20, 11, 22, 7, 22, 5, 20, 5, 16, 8, 15, 12, 15, 14, 18, 21, 17, 23, 17, 18, 18, 17, 18, 19, 18, 17, 21, 19, 22, 28, 23, 28, 17, 29, 21, 29, 17, 28, 21)
+polygons = [PackedInt32Array(10, 11, 12, 13, 17, 5, 6, 7, 8, 9), PackedInt32Array(19, 16, 17), PackedInt32Array(5, 19, 17), PackedInt32Array(19, 4, 16), PackedInt32Array(16, 18, 4), PackedInt32Array(20, 18, 4), PackedInt32Array(18, 14, 15, 0, 1, 2, 3, 20), PackedInt32Array(0, 22, 21, 1), PackedInt32Array(22, 24, 23, 25)]
 bones = ["hip", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/rightArm", PackedFloat32Array(0.5, 0.5, 1, 0.98, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.98, 0.98, 0, 0, 0.98, 0, 0.98, 0.5, 0.5, 0.5, 0.5, 0.5), "hip/chest/rightArm/rightFore", PackedFloat32Array(0, 0, 0, 0, 0.49, 0.98, 0.98, 0.98, 0.98, 0.98, 0.98, 0.98, 0.98, 0.98, 0, 0, 0.49, 0.98, 0, 0.49, 0, 0, 0, 0, 0, 0), "hip/chest/leftArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/leftArm/leftFore", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/rightLeg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/rightLeg/rightCalf", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leftLeg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leftLeg/leftCalf", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
 internal_vertex_count = 10
 
@@ -182,65 +190,144 @@ internal_vertex_count = 10
 position = Vector2(0, -15.192)
 
 [node name="hip" type="Bone2D" parent="Skeleton2D"]
-visible = false
-position = Vector2(0, 13.658)
+position = Vector2(0, 13.25)
 rest = Transform2D(1, 0, 0, 1, 0, 13.25)
 
-[node name="chest" type="Bone2D" parent="Skeleton2D/hip"]
-position = Vector2(0, -3)
-rest = Transform2D(1, 0, 0, 1, 0, -3)
+[node name="hipSprite" type="Sprite2D" parent="Skeleton2D/hip"]
+position = Vector2(0, 1.942)
+texture = ExtResource("7_6tp1k")
+region_enabled = true
+region_rect = Rect2(24, 33, 15, 3)
 
-[node name="rightArm" type="Bone2D" parent="Skeleton2D/hip/chest"]
-position = Vector2(-6, -11.058)
-rest = Transform2D(1, 0, 0, 1, -6, -11.058)
+[node name="leftLeg" type="Bone2D" parent="Skeleton2D/hip"]
+position = Vector2(4, 2.75)
+rotation = -0.0343188
+rest = Transform2D(1, 0, 0, 1, 4, 2.75)
 
-[node name="rightFore" type="Bone2D" parent="Skeleton2D/hip/chest/rightArm"]
-position = Vector2(-5.75, -0.999999)
-rest = Transform2D(1, 0, 0, 1, -5.75, -0.999999)
+[node name="leftCalf" type="Bone2D" parent="Skeleton2D/hip/leftLeg"]
+position = Vector2(1, 10)
+rotation = 0.0245134
+rest = Transform2D(1, 0, 0, 1, 1, 10)
 auto_calculate_length_and_angle = false
-length = 11.0
-bone_angle = 180.0
+length = 15.0
+bone_angle = 90.0
 
-[node name="leftArm" type="Bone2D" parent="Skeleton2D/hip/chest"]
-position = Vector2(5, -11.058)
-rest = Transform2D(1, 0, 0, 1, 5, -11.058)
+[node name="leftCalfSprite" type="Sprite2D" parent="Skeleton2D/hip/leftLeg/leftCalf"]
+position = Vector2(2, 9.2)
+texture = ExtResource("7_6tp1k")
+region_enabled = true
+region_rect = Rect2(40, 48, 8, 16)
 
-[node name="leftFore" type="Bone2D" parent="Skeleton2D/hip/chest/leftArm"]
-position = Vector2(6, -1)
-rest = Transform2D(1, 0, 0, 1, 6, -1)
-auto_calculate_length_and_angle = false
-length = 11.0
-bone_angle = 0.0
-
-[node name="head" type="Bone2D" parent="Skeleton2D/hip/chest"]
-position = Vector2(0.25, -16.5)
-rest = Transform2D(1, 0, 0, 1, 0.25, -16.5)
+[node name="leftLegSprite" type="Sprite2D" parent="Skeleton2D/hip/leftLeg"]
+position = Vector2(0, 6.5)
+texture = ExtResource("7_6tp1k")
+region_enabled = true
+region_rect = Rect2(32, 36, 7, 12)
 
 [node name="rightLeg" type="Bone2D" parent="Skeleton2D/hip"]
-position = Vector2(-4.75, 1.75)
-scale = Vector2(0.999999, 0.999999)
+position = Vector2(-4.75, 2.75)
+rotation = 0.0343188
 rest = Transform2D(1, 0, 0, 1, -4.75, 2.75)
 
 [node name="rightCalf" type="Bone2D" parent="Skeleton2D/hip/rightLeg"]
 position = Vector2(0, 10.25)
-scale = Vector2(0.999999, 0.999999)
+rotation = 0.0266924
 rest = Transform2D(1, 0, 0, 1, 0, 10.25)
 auto_calculate_length_and_angle = false
 length = 14.0
 bone_angle = 90.0
 
-[node name="leftLeg" type="Bone2D" parent="Skeleton2D/hip"]
-position = Vector2(4, 1.75)
-scale = Vector2(0.999998, 0.999998)
-rest = Transform2D(1, 0, 0, 1, 4, 2.75)
+[node name="rightCalfSprite" type="Sprite2D" parent="Skeleton2D/hip/rightLeg/rightCalf"]
+position = Vector2(2.25, 9)
+texture = ExtResource("7_6tp1k")
+region_enabled = true
+region_rect = Rect2(24, 48, 10, 16)
 
-[node name="leftCalf" type="Bone2D" parent="Skeleton2D/hip/leftLeg"]
-position = Vector2(1, 10)
-scale = Vector2(0.999999, 0.999999)
-rest = Transform2D(1, 0, 0, 1, 1, 10)
+[node name="rightLegSprite" type="Sprite2D" parent="Skeleton2D/hip/rightLeg"]
+position = Vector2(0.25, 6)
+texture = ExtResource("7_6tp1k")
+region_enabled = true
+region_rect = Rect2(24, 36, 6, 11)
+
+[node name="chest" type="Bone2D" parent="Skeleton2D/hip"]
+position = Vector2(0, -3.57423)
+rest = Transform2D(1, 0, 0, 1, 0, -3)
+
+[node name="chestSprite" type="Sprite2D" parent="Skeleton2D/hip/chest"]
+z_index = -1
+position = Vector2(0, 1.942)
+texture = ExtResource("7_6tp1k")
+offset = Vector2(0, -7.525)
+region_enabled = true
+region_rect = Rect2(25, 13, 13, 19)
+
+[node name="leftArm" type="Bone2D" parent="Skeleton2D/hip/chest"]
+position = Vector2(7.5, -10.291)
+rotation = 1.5708
+rest = Transform2D(1, 0, 0, 1, 7.5, -10.291)
+
+[node name="leftFore" type="Bone2D" parent="Skeleton2D/hip/chest/leftArm"]
+z_index = -1
+position = Vector2(5.9, -1.8398)
+rest = Transform2D(1, 0, 0, 1, 5.9, -1.8398)
 auto_calculate_length_and_angle = false
-length = 15.0
-bone_angle = 90.0
+length = 11.0
+bone_angle = 0.0
+
+[node name="leftForeSprite" type="Sprite2D" parent="Skeleton2D/hip/chest/leftArm/leftFore"]
+z_index = -2
+position = Vector2(7, -0.45)
+texture = ExtResource("7_6tp1k")
+offset = Vector2(0, 0.398)
+region_enabled = true
+region_rect = Rect2(48, 14, 12, 5)
+
+[node name="leftArmSprite" type="Sprite2D" parent="Skeleton2D/hip/chest/leftArm"]
+z_index = -2
+position = Vector2(-1.1, -1.267)
+scale = Vector2(1, 1)
+texture = ExtResource("7_6tp1k")
+offset = Vector2(3.5, 0.875)
+region_enabled = true
+region_rect = Rect2(38, 15, 9, 6)
+
+[node name="head" type="Bone2D" parent="Skeleton2D/hip/chest"]
+position = Vector2(0.25, -16.5)
+rest = Transform2D(1, 0, 0, 1, 0.25, -16.5)
+
+[node name="headSprite" type="Sprite2D" parent="Skeleton2D/hip/chest/head"]
+position = Vector2(0.75, -4.558)
+texture = ExtResource("7_6tp1k")
+region_enabled = true
+region_rect = Rect2(28, 0, 9, 12)
+
+[node name="rightArm" type="Bone2D" parent="Skeleton2D/hip/chest"]
+position = Vector2(-5, -11.058)
+rotation = -1.5708
+rest = Transform2D(1, 0, 0, 1, -5, -11.058)
+
+[node name="rightArmSprite" type="Sprite2D" parent="Skeleton2D/hip/chest/rightArm"]
+position = Vector2(0, -1.1)
+scale = Vector2(1, -1)
+texture = ExtResource("7_6tp1k")
+offset = Vector2(-4, -0.5)
+region_enabled = true
+region_rect = Rect2(14, 15, 11, 6)
+
+[node name="rightFore" type="Bone2D" parent="Skeleton2D/hip/chest/rightArm"]
+position = Vector2(-9.5, -0.0727999)
+rest = Transform2D(1, 0, 0, 1, -9.5, -0.0727999)
+auto_calculate_length_and_angle = false
+length = 11.0
+bone_angle = 180.0
+
+[node name="rightForeSprite" type="Sprite2D" parent="Skeleton2D/hip/chest/rightArm/rightFore"]
+position = Vector2(-1.90735e-06, 1)
+scale = Vector2(1, -1)
+texture = ExtResource("7_6tp1k")
+offset = Vector2(-6, 0)
+region_enabled = true
+region_rect = Rect2(1, 14, 12, 5)
 
 [node name="Gun" type="Node2D" parent="."]
 visible = false
@@ -292,7 +379,7 @@ monitorable = false
 shape = SubResource("4")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-visible = false
+zoom = Vector2(1.8, 1.8)
 
 [node name="top" type="Marker2D" parent="."]
 visible = false
