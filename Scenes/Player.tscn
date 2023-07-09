@@ -201,12 +201,14 @@ region_rect = Rect2(24, 33, 15, 3)
 
 [node name="leftLeg" type="Bone2D" parent="Skeleton2D/hip"]
 position = Vector2(4, 2.75)
-rotation = -0.0343188
+rotation = 0.192608
+scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 4, 2.75)
 
 [node name="leftCalf" type="Bone2D" parent="Skeleton2D/hip/leftLeg"]
 position = Vector2(1, 10)
-rotation = 0.0245134
+rotation = 0.466458
+scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 1, 10)
 auto_calculate_length_and_angle = false
 length = 15.0
@@ -226,12 +228,14 @@ region_rect = Rect2(32, 36, 7, 12)
 
 [node name="rightLeg" type="Bone2D" parent="Skeleton2D/hip"]
 position = Vector2(-4.75, 2.75)
-rotation = 0.0343188
+rotation = -0.346695
+scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, -4.75, 2.75)
 
 [node name="rightCalf" type="Bone2D" parent="Skeleton2D/hip/rightLeg"]
 position = Vector2(0, 10.25)
-rotation = 0.0266924
+rotation = 0.577825
+scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 0, 10.25)
 auto_calculate_length_and_angle = false
 length = 14.0
@@ -250,7 +254,7 @@ region_enabled = true
 region_rect = Rect2(24, 36, 6, 11)
 
 [node name="chest" type="Bone2D" parent="Skeleton2D/hip"]
-position = Vector2(0, -3.57423)
+position = Vector2(0, -3.6753)
 rest = Transform2D(1, 0, 0, 1, 0, -3)
 
 [node name="chestSprite" type="Sprite2D" parent="Skeleton2D/hip/chest"]
