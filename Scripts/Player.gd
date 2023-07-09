@@ -5,6 +5,10 @@ extends CharacterBody2D
 @onready var interaction_area = $InteractionArea
 @onready var slowdown = get_node("/root/Slowdown")
 
+@onready var AnimTree = $AnimationTree
+
+@onready var skeleton = $Skeleton2D
+
 @export var health = 1: set = set_health
 var dead = false
 signal died
@@ -49,15 +53,6 @@ func _physics_process(delta):
 
 	dir.x = r_input - l_input
 
-	facing = global_position.direction_to(get_global_mouse_position()).normalized().x
-	if facing > 0:
-		facing = ceil(facing)
-	elif facing < 0:
-		facing = floor(facing)
-	elif facing == 0:
-		facing = 1
-
-	
 	
 	velocity.y += gravity * meter_unit * delta
 	if not dead:
@@ -98,9 +93,19 @@ func _physics_process(delta):
 	move_and_slide()
 	velocity = velocity
 
-
-
-
+	
+	if is_on_floor():
+		var blenAmount = abs(velocity.x/max_speed)
+		blenAmount = clamp(blenAmount, 0, 1)
+		AnimTree.set("parameters/finalBlend/blend_amount", blenAmount)
+		var skelDir = dir.x
+		
+	else:
+		AnimTree.set("parameters/finalBlend/blend_amount", 0)
+		AnimTree.set("parameters/walkAnimTimeSeek/seek_request", 0)
+	
+	if dir.x != 0:
+			skeleton.scale.x = dir.x
 	
 
 
@@ -142,6 +147,8 @@ func _unhandled_input(event):
 	if event.is_action("parry"):
 		if event.is_pressed() and $ParryTimer.is_stopped() and $ParryDurationTimer.is_stopped():
 			parry_able = true
+			if $ParryTimer.is_stopped():
+				AnimTree.set("parameters/parry/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 			$ParryDurationTimer.start()
 		
 
