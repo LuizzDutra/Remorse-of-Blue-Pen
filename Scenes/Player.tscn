@@ -23,7 +23,7 @@ _data = {
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_i4fry"]
 filter_enabled = true
-filters = ["Skeleton2D/hip/leftLeg/leftCalf:rotation", "Skeleton2D/hip/leftLeg:rotation", "Skeleton2D/hip/rightLeg/rightCalf:rotation", "Skeleton2D/hip/rightLeg:rotation"]
+filters = ["Skeleton2D/hip/chest/leftArm/leftFore:rotation", "Skeleton2D/hip/chest/leftArm:rotation", "Skeleton2D/hip/chest/rightArm/rightFore:rotation", "Skeleton2D/hip/chest/rightArm:rotation", "Skeleton2D/hip/leftLeg/leftCalf:rotation", "Skeleton2D/hip/leftLeg:rotation", "Skeleton2D/hip/rightLeg/rightCalf:rotation", "Skeleton2D/hip/rightLeg:rotation"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3pyon"]
 animation = &"idle"
@@ -45,25 +45,25 @@ animation = &"walk"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_hdybs"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_yp7cs"]
-graph_offset = Vector2(-326.193, -42.3699)
+graph_offset = Vector2(-202.414, 42.1376)
 nodes/finalBlend/node = SubResource("AnimationNodeBlend2_i4fry")
 nodes/finalBlend/position = Vector2(440, 240)
 nodes/idle/node = SubResource("AnimationNodeAnimation_3pyon")
 nodes/idle/position = Vector2(60, 120)
-nodes/output/position = Vector2(740, 280)
+nodes/output/position = Vector2(1020, 240)
 nodes/parry/node = SubResource("AnimationNodeOneShot_2bd25")
-nodes/parry/position = Vector2(280, 100)
+nodes/parry/position = Vector2(800, 240)
 nodes/parryAnim/node = SubResource("AnimationNodeAnimation_aaqae")
-nodes/parryAnim/position = Vector2(-60, 240)
+nodes/parryAnim/position = Vector2(420, 480)
 nodes/parryTimescale/node = SubResource("AnimationNodeTimeScale_w0hgl")
-nodes/parryTimescale/position = Vector2(100, 260)
+nodes/parryTimescale/position = Vector2(580, 340)
 nodes/walkAnim/node = SubResource("AnimationNodeAnimation_5pr0p")
-nodes/walkAnim/position = Vector2(-40, 400)
+nodes/walkAnim/position = Vector2(-160, 360)
 nodes/walkAnimTimeSeek/node = SubResource("AnimationNodeTimeSeek_2jak7")
-nodes/walkAnimTimeSeek/position = Vector2(120, 420)
+nodes/walkAnimTimeSeek/position = Vector2(60, 340)
 nodes/walkTimescale/node = SubResource("AnimationNodeTimeScale_hdybs")
 nodes/walkTimescale/position = Vector2(260, 340)
-node_connections = [&"output", 0, &"finalBlend", &"finalBlend", 0, &"parry", &"finalBlend", 1, &"walkTimescale", &"parry", 0, &"idle", &"parry", 1, &"parryTimescale", &"parryTimescale", 0, &"parryAnim", &"walkAnimTimeSeek", 0, &"walkAnim", &"walkTimescale", 0, &"walkAnimTimeSeek"]
+node_connections = [&"output", 0, &"parry", &"finalBlend", 0, &"idle", &"finalBlend", 1, &"walkTimescale", &"parry", 0, &"finalBlend", &"parry", 1, &"parryTimescale", &"parryTimescale", 0, &"parryAnim", &"walkAnimTimeSeek", 0, &"walkAnim", &"walkTimescale", 0, &"walkAnimTimeSeek"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(22, 60)
@@ -202,12 +202,12 @@ region_rect = Rect2(24, 33, 15, 3)
 
 [node name="leftLeg" type="Bone2D" parent="Skeleton2D/hip"]
 position = Vector2(4, 2.75)
-rotation = 0.334828
+rotation = -0.584044
 rest = Transform2D(1, 0, 0, 1, 4, 2.75)
 
 [node name="leftCalf" type="Bone2D" parent="Skeleton2D/hip/leftLeg"]
 position = Vector2(1, 10)
-rotation = 0.0574125
+rotation = 0.417174
 rest = Transform2D(1, 0, 0, 1, 1, 10)
 auto_calculate_length_and_angle = false
 length = 15.0
@@ -227,13 +227,12 @@ region_rect = Rect2(32, 36, 7, 12)
 
 [node name="rightLeg" type="Bone2D" parent="Skeleton2D/hip"]
 position = Vector2(-4.75, 2.75)
-rotation = -0.345162
-scale = Vector2(1, 1)
+rotation = 0.584044
 rest = Transform2D(1, 0, 0, 1, -4.75, 2.75)
 
 [node name="rightCalf" type="Bone2D" parent="Skeleton2D/hip/rightLeg"]
 position = Vector2(0, 10.25)
-rotation = 0.246544
+rotation = 0.454256
 rest = Transform2D(1, 0, 0, 1, 0, 10.25)
 auto_calculate_length_and_angle = false
 length = 14.0
@@ -252,7 +251,7 @@ region_enabled = true
 region_rect = Rect2(24, 36, 6, 11)
 
 [node name="chest" type="Bone2D" parent="Skeleton2D/hip"]
-position = Vector2(0, -3.07511)
+position = Vector2(0, -3.42841)
 rest = Transform2D(1, 0, 0, 1, 0, -3)
 
 [node name="chestSprite" type="Sprite2D" parent="Skeleton2D/hip/chest"]
@@ -265,21 +264,22 @@ region_rect = Rect2(25, 13, 13, 19)
 
 [node name="leftArm" type="Bone2D" parent="Skeleton2D/hip/chest"]
 position = Vector2(7.5, -10.291)
-rotation = 1.39626
-scale = Vector2(1, 1)
+rotation = 2.08995
 rest = Transform2D(1, 0, 0, 1, 7.5, -10.291)
 
 [node name="leftFore" type="Bone2D" parent="Skeleton2D/hip/chest/leftArm"]
 z_index = -1
-position = Vector2(6.8, -0.939799)
-rest = Transform2D(1, 0, 0, 1, 6.8, -0.939799)
+position = Vector2(6.9, -0.439799)
+rotation = -1.91986
+scale = Vector2(1, 1)
+rest = Transform2D(1, 0, 0, 1, 6.9, -0.439799)
 auto_calculate_length_and_angle = false
 length = 11.0
 bone_angle = 0.0
 
 [node name="leftForeSprite" type="Sprite2D" parent="Skeleton2D/hip/chest/leftArm/leftFore"]
 z_index = -2
-position = Vector2(6, -0.1)
+position = Vector2(5.9, -0.600001)
 texture = ExtResource("7_6tp1k")
 offset = Vector2(0, 0.398)
 region_enabled = true
@@ -306,7 +306,7 @@ region_rect = Rect2(28, 0, 9, 12)
 
 [node name="rightArm" type="Bone2D" parent="Skeleton2D/hip/chest"]
 position = Vector2(-6, -11.058)
-rotation = -1.5708
+rotation = -2.08995
 rest = Transform2D(1, 0, 0, 1, -6, -11.058)
 
 [node name="rightArmSprite" type="Sprite2D" parent="Skeleton2D/hip/chest/rightArm"]
@@ -319,6 +319,8 @@ region_rect = Rect2(14, 15, 11, 6)
 
 [node name="rightFore" type="Bone2D" parent="Skeleton2D/hip/chest/rightArm"]
 position = Vector2(-9.5, -0.0727999)
+rotation = -1.91986
+scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, -9.5, -0.0727999)
 auto_calculate_length_and_angle = false
 length = 11.0
