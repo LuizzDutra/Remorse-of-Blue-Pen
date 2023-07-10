@@ -71,7 +71,7 @@ func _physics_process(delta):
 
 	
 	if jump_input == 1 and jump_able and not dead:
-		AnimTree.set("parameters/jumpOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		#AnimTree.set("parameters/jumpOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		velocity.y = -jump_force * meter_unit
 		jump_able = false
 
@@ -104,7 +104,10 @@ func _physics_process(delta):
 		
 	else:
 		AnimTree.set("parameters/airborneBlend/blend_amount", clamp(abs(velocity.y/max_vertical_speed), 0.25, 0.5)*2)
-		AnimTree.set("parameters/airborneBlendSpace/blend_position", velocity.y/max_vertical_speed)
+		var blenPos = clamp(velocity.y/max_vertical_speed, -1, 0.4)
+		if blenPos > 0:
+			blenPos *= 2.5
+		AnimTree.set("parameters/airborneBlendSpace/blend_position", blenPos)
 		
 	
 	if dir.x != 0:
@@ -159,8 +162,9 @@ func parry():
 	var parry_success = false
 	for area in $ParryArea.get_overlapping_areas():
 		if area.get_parent() != null and area.get_parent().has_method("parry"):
-			area.get_parent().parry("player")
-			parry_success = true
+			if area.get_parent().team != $HurtBox.team:
+				area.get_parent().parry("player")
+				parry_success = true
 	if parry_success:
 		$ParryDurationTimer.stop()
 		$ParryTimer.stop()
