@@ -42,6 +42,8 @@ var parry_able = false
 
 func _ready():
 	$HurtBox.team = "player"
+		
+		
 
 func _physics_process(delta):
 	
@@ -112,6 +114,7 @@ func _physics_process(delta):
 	
 	if dir.x != 0:
 			skeleton.scale.x = dir.x
+			
 	
 
 
@@ -214,6 +217,10 @@ func interact_process():#interaction
 	elif len(interact_q_1) > 0:
 		interact_q_1[0].interact()
 
+func get_armAimRotation():
+	print(global_position.angle_to_point(get_global_mouse_position()))
+	$Skeleton2D/hip/chest/rightArm.rotation = global_position.angle_to(get_global_mouse_position())
+	$Skeleton2D/hip/chest/head.rotation = global_position.angle_to_point(get_global_mouse_position())
 
 func _on_DeathResetTimer_timeout():
 	emit_signal("died")
